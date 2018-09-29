@@ -69,8 +69,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             {front_left/=max; front_right/=max; rear_left/=max; rear_right/=max;}
 
             leftFrontMotor.setPower(front_left * drivePower);
-            rightFrontMotor.setPower(rear_left * drivePower);
-            rightBackMotor.setPower(front_right * drivePower);
-            leftBackMotor.setPower(rear_right * drivePower);
+            rightFrontMotor.setPower(front_right * drivePower);
+            rightBackMotor.setPower( rear_right* drivePower);
+            leftBackMotor.setPower(rear_left * drivePower);
         }
 }
