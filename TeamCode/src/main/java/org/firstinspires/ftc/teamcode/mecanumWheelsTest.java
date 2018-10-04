@@ -3,22 +3,25 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 
 
-    @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
-    public class mecanumWheelsTest extends OpMode
-    {
+@TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
+    public class mecanumWheelsTest extends OpMode {
+
+
         // Declare OpMode members.
         private ElapsedTime runtime = new ElapsedTime();
         private DcMotor leftFrontMotor = null;
         private DcMotor rightFrontMotor = null;
         private DcMotor leftBackMotor = null;
         private DcMotor rightBackMotor = null;
-
-       final float K = 0.5f;
-       final double drivePower = 0.75;
+        private CRServo intakeServo = null;
+        final double K = 0.5f;
+        final double drivePower = 0.75;
         /*
          * Code to run ONCE when the driver hits INIT
          */
@@ -29,11 +32,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             // Initialize the hardware variables. Note that the strings used here as parameters
             // to 'get' must correspond to the names assigned during the robot configuration
             // step (using the FTC Robot Controller app on the phone).
-            leftFrontMotor  = hardwareMap.get(DcMotor.class, "leftFrontMotor");
+            leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            rightBackMotor  = hardwareMap.get(DcMotor.class, "rightBackMotor");
-
+            rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
+            intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
 
@@ -50,7 +53,22 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         }
 
         @Override
-        public void loop() {
+        public void loop()
+        {
+
+
+            if(gamepad2.a)
+            {
+               intakeServo.setPower(1);
+            }
+            else
+            {
+                intakeServo.setPower(0);
+            }
+    }
+
+        public void Drive()
+        {
             double forward = -gamepad1.left_stick_y; // push joystick1 forward to go forward
             double right = gamepad1.left_stick_x; // push joystick1 to the right to strafe right
             double clockwise = gamepad1.right_stick_x; // push joystick2 to the right to rotate clockwise
