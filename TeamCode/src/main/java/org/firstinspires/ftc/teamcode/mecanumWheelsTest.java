@@ -70,19 +70,20 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             else
                 lift.setPower(0);
 
-            if(gamepad2.right_trigger == 1)
+            if(gamepad2.right_trigger > .1)
                 liftArm.setPower(1);
-            else if(gamepad2.left_trigger == -1)
+            else if(gamepad2.left_trigger > .1)
                  liftArm.setPower(-1);
             else
                 liftArm.setPower(0);
+
+
             if(gamepad2.right_stick_y > .1)
                 intakeArm.setPower(1);
-            if(gamepad2.right_stick_y < -.1)
+            else if(gamepad2.right_stick_y < -.1)
                 intakeArm.setPower(-.5);
-
             else
-                intake.setPower(.5);
+                intakeArm.setPower(0);
 
 
 
