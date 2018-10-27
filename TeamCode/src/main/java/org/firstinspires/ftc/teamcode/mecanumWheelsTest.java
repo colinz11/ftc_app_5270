@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
     @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
@@ -18,6 +19,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         private DcMotor liftArm = null;
         private DcMotor intake = null;
         private DcMotor intakeArm = null;
+        private Servo linearServo = null;
 
        final float K = 0.5f;
        final double drivePower = 1;
@@ -39,7 +41,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             liftArm = hardwareMap.get(DcMotor.class, "liftArm");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
-
+            linearServo = hardwareMap.get(Servo.class, "linearServo");
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
 
@@ -57,9 +59,23 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
         @Override
         public void loop() {
+telemetry.addData("servo position",linearServo.getPosition());
 
+            if(gamepad2.dpad_up)
+                linearServo.setPosition(linearServo.getPosition() - .01);
+            else if(gamepad2.dpad_down)
+                linearServo.setPosition(linearServo.getPosition() + .01);
+            else
+                linearServo.setPosition(linearServo.getPosition());
+
+            if(linearServo.getPosition() > .45)
+                linearServo.setPosition(.45);
+            else if(linearServo.getPosition() < .08)
+                linearServo.setPosition(.08);
             if(gamepad2.a)
                 intake.setPower(.75);
+            else if(gamepad2.b)
+                intake.setPower(-.75);
             else
                 intake.setPower(0);
 
@@ -79,9 +95,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
             if(gamepad2.right_stick_y > .1)
-                intakeArm.setPower(1);
+                intakeArm.setPower(.5);
             else if(gamepad2.right_stick_y < -.1)
-                intakeArm.setPower(-.5);
+                intakeArm.setPower(-25);
             else
                 intakeArm.setPower(0);
 
