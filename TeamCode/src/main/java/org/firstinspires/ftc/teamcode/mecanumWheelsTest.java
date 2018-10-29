@@ -62,16 +62,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 telemetry.addData("servo position",linearServo.getPosition());
 
             if(gamepad2.dpad_up)
-                linearServo.setPosition(linearServo.getPosition() - .01);
+                linearServo.setPosition(.08);
             else if(gamepad2.dpad_down)
-                linearServo.setPosition(linearServo.getPosition() + .01);
+                linearServo.setPosition(.45);
             else
                 linearServo.setPosition(linearServo.getPosition());
 
-            if(linearServo.getPosition() > .45)
-                linearServo.setPosition(.45);
-            else if(linearServo.getPosition() < .08)
-                linearServo.setPosition(.08);
             if(gamepad2.a)
                 intake.setPower(.75);
             else if(gamepad2.b)
@@ -95,9 +91,9 @@ telemetry.addData("servo position",linearServo.getPosition());
 
 
             if(gamepad2.right_stick_y > .1)
-                intakeArm.setPower(.5);
+                intakeArm.setPower(-.25);
             else if(gamepad2.right_stick_y < -.1)
-                intakeArm.setPower(-25);
+                intakeArm.setPower(.5);
             else
                 intakeArm.setPower(0);
 
