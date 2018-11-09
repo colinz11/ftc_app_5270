@@ -54,8 +54,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             telemetry.addData("Path", "Lowering", runtime.seconds());
             telemetry.update();
             }
-            runtime.reset();
             lift.setPower(0);
+
+            runtime.reset();
             backRight.setPower(1);
             frontLeft.setPower(1);
             frontRight.setPower(1);
@@ -65,6 +66,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                 telemetry.addData("Path", "Lowering", runtime.seconds());
                 telemetry.update();
             }
+
             backRight.setPower(0);
             frontLeft.setPower(0);
             frontRight.setPower(0);

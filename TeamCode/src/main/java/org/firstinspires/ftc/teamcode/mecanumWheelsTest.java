@@ -6,34 +6,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-<<<<<<< HEAD
-
-
 
 @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
     public class mecanumWheelsTest extends OpMode {
 
-
-        // Declare OpMode members.
-        private ElapsedTime runtime = new ElapsedTime();
-        private DcMotor leftFrontMotor = null;
-        private DcMotor rightFrontMotor = null;
-        private DcMotor leftBackMotor = null;
-        private DcMotor rightBackMotor = null;
-        private DcMotor intakeMotor = null;
-        private DcMotor armMotor = null;
-        private DcMotor liftArmMotor = null;
-        private DcMotor liftMotor = null;
-        private Servo linearServo = null;
         final double K = 0.5f;
-        final double drivePower = 0.75;
+        final double drivePower = 1;
 
 
-=======
-    @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
-    public class mecanumWheelsTest extends OpMode
-    {
-        // Declare OpMode members.
+// Declare OpMode members.
         private ElapsedTime runtime = new ElapsedTime();
         private DcMotor frontLeft = null;
         private DcMotor frontRight = null;
@@ -45,27 +26,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         private DcMotor intakeArm = null;
         private Servo linearServo = null;
 
-       final float K = 0.5f;
-       final double drivePower = 1;
-        /*
-         * Code to run ONCE when the driver hits INIT
-         */
->>>>>>> f9f7f12566930a13c9e34ea2a703ec8daae87dfb
         @Override
         public void init() {
             telemetry.addData("Status", "Initialized");
 
-<<<<<<< HEAD
-            leftFrontMotor = hardwareMap.get(DcMotor.class, "frontLeft");
-            rightFrontMotor = hardwareMap.get(DcMotor.class, "frontRight");
-            leftBackMotor = hardwareMap.get(DcMotor.class, "backLeft");
-            rightBackMotor = hardwareMap.get(DcMotor.class, "backRight");
-            intakeMotor = hardwareMap.get(DcMotor.class, "intake");
-            armMotor = hardwareMap.get(DcMotor.class, "intakeArm");
-            liftMotor = hardwareMap.get(DcMotor.class, "lift");
-            liftArmMotor = hardwareMap.get(DcMotor.class, "liftArm");
-            linearServo = hardwareMap.get(Servo.class, "linearServo");
-=======
             // Initialize the hardware variables. Note that the strings used here as parameters
             // to 'get' must correspond to the names assigned during the robot configuration
             // step (using the FTC Robot Controller app on the phone).
@@ -80,7 +44,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             linearServo = hardwareMap.get(Servo.class, "linearServo");
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
->>>>>>> f9f7f12566930a13c9e34ea2a703ec8daae87dfb
+
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -94,45 +58,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             runtime.reset();
         }
 
-        @Override
-<<<<<<< HEAD
-        public void loop()
-        {
 
-
-            if(gamepad2.a)
-                intakeMotor.setPower(.75);
-
-            else
-                intakeMotor.setPower(0);
-
-
-                armMotor.setPower(gamepad2.left_stick_y / 2);
-
-            liftArmMotor.setPower(gamepad2.right_stick_y / 2);
-
-            if(gamepad2.dpad_up)
-                liftMotor.setPower(.75);
-            if(gamepad2.dpad_down)
-                liftMotor.setPower(-.75);
-            if(gamepad2.right_trigger > 0.1)
-            linearServo.setPosition(linearServo.getPosition() + gamepad2.right_trigger / 10);
-            else if(gamepad2.left_trigger > 0.1)
-                linearServo.setPosition(linearServo.getPosition() - gamepad2.left_trigger / 10);
-            else
-                linearServo.setPosition(linearServo.getPosition());
-
-
-
-            Drive();
-
-
-    }
-
-        public void Drive()
-=======
         public void loop() {
-telemetry.addData("servo position",linearServo.getPosition());
+            telemetry.addData("servo position",linearServo.getPosition());
 
             if(gamepad2.dpad_up)
                 linearServo.setPosition(.07);
@@ -174,7 +102,6 @@ telemetry.addData("servo position",linearServo.getPosition());
 
         }
        private void Drive()
->>>>>>> f9f7f12566930a13c9e34ea2a703ec8daae87dfb
         {
             double forward = -gamepad1.left_stick_y; // push joystick1 forward to go forward
             double right = gamepad1.left_stick_x; // push joystick1 to the right to strafe right
