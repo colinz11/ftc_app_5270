@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+<<<<<<< HEAD
 
 
 
@@ -28,10 +29,33 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         final double drivePower = 0.75;
 
 
+=======
+    @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
+    public class mecanumWheelsTest extends OpMode
+    {
+        // Declare OpMode members.
+        private ElapsedTime runtime = new ElapsedTime();
+        private DcMotor frontLeft = null;
+        private DcMotor frontRight = null;
+        private DcMotor backLeft = null;
+        private DcMotor backRight = null;
+        private DcMotor lift = null;
+        private DcMotor liftArm = null;
+        private DcMotor intake = null;
+        private DcMotor intakeArm = null;
+        private Servo linearServo = null;
+
+       final float K = 0.5f;
+       final double drivePower = 1;
+        /*
+         * Code to run ONCE when the driver hits INIT
+         */
+>>>>>>> f9f7f12566930a13c9e34ea2a703ec8daae87dfb
         @Override
         public void init() {
             telemetry.addData("Status", "Initialized");
 
+<<<<<<< HEAD
             leftFrontMotor = hardwareMap.get(DcMotor.class, "frontLeft");
             rightFrontMotor = hardwareMap.get(DcMotor.class, "frontRight");
             leftBackMotor = hardwareMap.get(DcMotor.class, "backLeft");
@@ -41,9 +65,25 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             liftMotor = hardwareMap.get(DcMotor.class, "lift");
             liftArmMotor = hardwareMap.get(DcMotor.class, "liftArm");
             linearServo = hardwareMap.get(Servo.class, "linearServo");
+=======
+            // Initialize the hardware variables. Note that the strings used here as parameters
+            // to 'get' must correspond to the names assigned during the robot configuration
+            // step (using the FTC Robot Controller app on the phone).
+            frontLeft  = hardwareMap.get(DcMotor.class, "frontLeft");
+            frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+            backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+            backRight  = hardwareMap.get(DcMotor.class, "backRight");
+            lift = hardwareMap.get(DcMotor.class, "lift");
+            liftArm = hardwareMap.get(DcMotor.class, "liftArm");
+            intake = hardwareMap.get(DcMotor.class, "intake");
+            intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
+            linearServo = hardwareMap.get(Servo.class, "linearServo");
+            // Most robots need the motor on one side to be reversed to drive forward
+            // Reverse the motor that runs backwards when connected directly to the battery
+>>>>>>> f9f7f12566930a13c9e34ea2a703ec8daae87dfb
 
-            leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
-            leftBackMotor.setDirection(DcMotor.Direction.REVERSE);
+            frontLeft.setDirection(DcMotor.Direction.REVERSE);
+            backLeft.setDirection(DcMotor.Direction.REVERSE);
 
             // Tell the driver that initialization is complete.
             telemetry.addData("Status", "Initialized");
@@ -55,6 +95,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         }
 
         @Override
+<<<<<<< HEAD
         public void loop()
         {
 
@@ -89,6 +130,51 @@ import com.qualcomm.robotcore.util.ElapsedTime;
     }
 
         public void Drive()
+=======
+        public void loop() {
+telemetry.addData("servo position",linearServo.getPosition());
+
+            if(gamepad2.dpad_up)
+                linearServo.setPosition(.07);
+            else if(gamepad2.dpad_down)
+                linearServo.setPosition(.44);
+            else
+                linearServo.setPosition(linearServo.getPosition());
+
+            if(gamepad2.a)
+                intake.setPower(.75);
+            else if(gamepad2.b)
+                intake.setPower(-.75);
+            else
+                intake.setPower(0);
+
+            if (gamepad2.left_stick_y > .1)
+                lift.setPower(1);
+            else if(gamepad2.left_stick_y < -.1)
+                lift.setPower(-1);
+            else
+                lift.setPower(0);
+
+            if(gamepad2.right_trigger > .1)
+                liftArm.setPower(1);
+            else if(gamepad2.left_trigger > .1)
+                 liftArm.setPower(-1);
+            else
+                liftArm.setPower(0);
+
+
+            if(gamepad2.right_stick_y > .1)
+                intakeArm.setPower(-.25);
+            else if(gamepad2.right_stick_y < -.1)
+                intakeArm.setPower(.5);
+            else
+                intakeArm.setPower(0);
+
+            Drive();
+
+        }
+       private void Drive()
+>>>>>>> f9f7f12566930a13c9e34ea2a703ec8daae87dfb
         {
             double forward = -gamepad1.left_stick_y; // push joystick1 forward to go forward
             double right = gamepad1.left_stick_x; // push joystick1 to the right to strafe right
@@ -107,9 +193,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             if (max>1)
             {front_left/=max; front_right/=max; rear_left/=max; rear_right/=max;}
 
-            leftFrontMotor.setPower(front_left * drivePower);
-            rightFrontMotor.setPower(front_right * drivePower);
-            rightBackMotor.setPower( rear_right* drivePower);
-            leftBackMotor.setPower(rear_left * drivePower);
+            frontLeft.setPower(front_left * drivePower);
+            frontRight.setPower(front_right * drivePower);
+            backRight.setPower( rear_right* drivePower);
+            backLeft.setPower(rear_left * drivePower);
         }
 }
