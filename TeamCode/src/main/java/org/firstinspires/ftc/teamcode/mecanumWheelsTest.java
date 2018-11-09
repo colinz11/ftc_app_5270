@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.CRServo;
+
 
 
 
@@ -19,26 +19,28 @@ import com.qualcomm.robotcore.hardware.CRServo;
         private DcMotor rightFrontMotor = null;
         private DcMotor leftBackMotor = null;
         private DcMotor rightBackMotor = null;
-        private CRServo intakeServo = null;
+        private DcMotor intakeMotor = null;
+        private DcMotor armMotor = null;
+        private DcMotor liftArmMotor = null;
+        private DcMotor liftMotor = null;
+        private Servo linearServo = null;
         final double K = 0.5f;
         final double drivePower = 0.75;
-        /*
-         * Code to run ONCE when the driver hits INIT
-         */
+
+
         @Override
         public void init() {
             telemetry.addData("Status", "Initialized");
 
-            // Initialize the hardware variables. Note that the strings used here as parameters
-            // to 'get' must correspond to the names assigned during the robot configuration
-            // step (using the FTC Robot Controller app on the phone).
-            leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-            rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
-            // Most robots need the motor on one side to be reversed to drive forward
-            // Reverse the motor that runs backwards when connected directly to the battery
+            leftFrontMotor = hardwareMap.get(DcMotor.class, "frontLeft");
+            rightFrontMotor = hardwareMap.get(DcMotor.class, "frontRight");
+            leftBackMotor = hardwareMap.get(DcMotor.class, "backLeft");
+            rightBackMotor = hardwareMap.get(DcMotor.class, "backRight");
+            intakeMotor = hardwareMap.get(DcMotor.class, "intake");
+            armMotor = hardwareMap.get(DcMotor.class, "intakeArm");
+            liftMotor = hardwareMap.get(DcMotor.class, "lift");
+            liftArmMotor = hardwareMap.get(DcMotor.class, "liftArm");
+            linearServo = hardwareMap.get(Servo.class, "linearServo");
 
             leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
             leftBackMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -58,13 +60,32 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 
             if(gamepad2.a)
-            {
-               intakeServo.setPower(1);
-            }
+                intakeMotor.setPower(.75);
+
             else
-            {
-                intakeServo.setPower(0);
-            }
+                intakeMotor.setPower(0);
+
+
+                armMotor.setPower(gamepad2.left_stick_y / 2);
+
+            liftArmMotor.setPower(gamepad2.right_stick_y / 2);
+
+            if(gamepad2.dpad_up)
+                liftMotor.setPower(.75);
+            if(gamepad2.dpad_down)
+                liftMotor.setPower(-.75);
+            if(gamepad2.right_trigger > 0.1)
+            linearServo.setPosition(linearServo.getPosition() + gamepad2.right_trigger / 10);
+            else if(gamepad2.left_trigger > 0.1)
+                linearServo.setPosition(linearServo.getPosition() - gamepad2.left_trigger / 10);
+            else
+                linearServo.setPosition(linearServo.getPosition());
+
+
+
+            Drive();
+
+
     }
 
         public void Drive()
