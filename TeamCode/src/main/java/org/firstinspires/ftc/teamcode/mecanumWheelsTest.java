@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
     public class mecanumWheelsTest extends OpMode {
 
-        final double K = 0.5f;
+        final double K = 1f;
         final double drivePower = 1;
 
 
@@ -76,17 +76,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             else
                 intake.setPower(0);
 
-            if (gamepad2.left_stick_y > .1)
+            if (gamepad2.left_stick_y > .5)
                 lift.setPower(1);
-            else if(gamepad2.left_stick_y < -.1)
+            else if(gamepad2.left_stick_y < -.5)
                 lift.setPower(-1);
             else
                 lift.setPower(0);
 
             if(gamepad2.right_trigger > .1)
-                liftArm.setPower(1);
+                liftArm.setPower(.4);
             else if(gamepad2.left_trigger > .1)
-                 liftArm.setPower(-1);
+                 liftArm.setPower(-.4);
             else
                 liftArm.setPower(0);
 

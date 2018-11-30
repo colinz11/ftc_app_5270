@@ -49,7 +49,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                 waitForStart();
             lift.setPower(-1);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 1.5))
+            while (opModeIsActive() && (runtime.seconds() < 6.6))
             {
             telemetry.addData("Path", "Lowering", runtime.seconds());
             telemetry.update();
@@ -57,11 +57,22 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             lift.setPower(0);
 
             runtime.reset();
-            backRight.setPower(1);
-            frontLeft.setPower(1);
-            frontRight.setPower(1);
-            backLeft.setPower(1);
+            backRight.setPower(-.5);
+            frontLeft.setPower(.5);
+            frontRight.setPower(.5);
+            backLeft.setPower(-.5);
             while (opModeIsActive() && (runtime.seconds() < 1))
+            {
+                telemetry.addData("Path", "Lowering", runtime.seconds());
+                telemetry.update();
+            }
+            runtime.reset();
+
+            backRight.setPower(.5);
+            frontLeft.setPower(.5);
+            frontRight.setPower(.5);
+            backLeft.setPower(.5);
+            while (opModeIsActive() && (runtime.seconds() < 1.5))
             {
                 telemetry.addData("Path", "Lowering", runtime.seconds());
                 telemetry.update();
