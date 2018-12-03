@@ -21,10 +21,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         private DcMotor backLeft = null;
         private DcMotor backRight = null;
         private DcMotor lift = null;
-        private DcMotor liftArm = null;
+        private DcMotor armExtension = null;
         private DcMotor intake = null;
         private DcMotor intakeArm = null;
-        private Servo linearServo = null;
 
         @Override
         public void init() {
@@ -38,10 +37,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             backLeft = hardwareMap.get(DcMotor.class, "backLeft");
             backRight  = hardwareMap.get(DcMotor.class, "backRight");
             lift = hardwareMap.get(DcMotor.class, "lift");
-            liftArm = hardwareMap.get(DcMotor.class, "liftArm");
+            armExtension = hardwareMap.get(DcMotor.class, "armExtension");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
-            linearServo = hardwareMap.get(Servo.class, "linearServo");
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
 
@@ -60,15 +58,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
         public void loop() {
-            telemetry.addData("servo position",linearServo.getPosition());
-
-            if(gamepad2.dpad_up)
-                linearServo.setPosition(.07);
-            else if(gamepad2.dpad_down)
-                linearServo.setPosition(.44);
-            else
-                linearServo.setPosition(linearServo.getPosition());
-
             if(gamepad2.a)
                 intake.setPower(.75);
             else if(gamepad2.b)
@@ -76,19 +65,19 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             else
                 intake.setPower(0);
 
-            if (gamepad2.left_stick_y > .5)
+            if (gamepad1.left_trigger > .1)
                 lift.setPower(1);
-            else if(gamepad2.left_stick_y < -.5)
+            else if(gamepad1.right_trigger > .1)
                 lift.setPower(-1);
             else
                 lift.setPower(0);
 
             if(gamepad2.right_trigger > .1)
-                liftArm.setPower(.4);
+                armExtension.setPower(.4);
             else if(gamepad2.left_trigger > .1)
-                 liftArm.setPower(-.4);
+                 armExtension.setPower(-.4);
             else
-                liftArm.setPower(0);
+                armExtension.setPower(0);
 
 
             if(gamepad2.right_stick_y > .1)
