@@ -2,9 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
 
 @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
@@ -22,8 +25,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         private DcMotor backRight = null;
         private DcMotor lift = null;
         private DcMotor armExtension = null;
-        private DcMotor intake = null;
+       // private DcMotor intake = null;
+        private CRServo intake = null;
         private DcMotor intakeArm = null;
+
 
         @Override
         public void init() {
@@ -38,7 +43,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             backRight  = hardwareMap.get(DcMotor.class, "backRight");
             lift = hardwareMap.get(DcMotor.class, "lift");
             armExtension = hardwareMap.get(DcMotor.class, "armExtension");
-            intake = hardwareMap.get(DcMotor.class, "intake");
+           // intake = hardwareMap.get(DcMotor.class, "intake");
+            intake = hardwareMap.get(CRServo.class, "intakes");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
@@ -58,6 +64,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
         public void loop() {
+
             if(gamepad2.a)
                 intake.setPower(.75);
             else if(gamepad2.b)
