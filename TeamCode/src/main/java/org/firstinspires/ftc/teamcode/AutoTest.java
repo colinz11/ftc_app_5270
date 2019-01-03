@@ -15,16 +15,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
     public class AutoTest extends LinearOpMode
 {
 
-        private ElapsedTime runtime = new ElapsedTime();
-        private DcMotor frontLeft = null;
-        private DcMotor frontRight = null;
-        private DcMotor backLeft = null;
-        private DcMotor backRight = null;
-        private DcMotor lift = null;
-        private DcMotor liftArm = null;
-        private DcMotor intake = null;
-        private DcMotor intakeArm = null;
-        private Servo linearServo = null;
+    private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor frontLeft = null;
+    private DcMotor frontRight = null;
+    private DcMotor backLeft = null;
+    private DcMotor backRight = null;
+    private DcMotor lift = null;
+    private DcMotor armExtension = null;
+    private DcMotor intake = null;
+    private DcMotor intakeArm = null;
 
         //Declares detector
         private GoldAlignDetector detector;
@@ -40,10 +39,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             backLeft = hardwareMap.get(DcMotor.class, "backLeft");
             backRight  = hardwareMap.get(DcMotor.class, "backRight");
             lift = hardwareMap.get(DcMotor.class, "lift");
-            liftArm = hardwareMap.get(DcMotor.class, "liftArm");
+            armExtension = hardwareMap.get(DcMotor.class, "armExtension");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
-            linearServo = hardwareMap.get(Servo.class, "linearServo");
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
 
