@@ -122,16 +122,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                     detector.getXPosition();
                     while (detector.isFound() == false) {
                        //code for moving the robot to find gold blocks
-                        /* backRight.setPower(-.5);
-                        frontLeft.setPower(.5);
-                        frontRight.setPower(.5);
-                        backLeft.setPower(-.5);
+                        runtime.reset();
+                        backRight.setPower(1);
+                        while (opModeIsActive() && (runtime.seconds() < 1.5))
+                        {
+                            telemetry.addData("Path", "Lowering", runtime.seconds());
+                            telemetry.update();
+                        }
 
-                        backRight.setPower(0);
-                        frontLeft.setPower(0);
-                        frontRight.setPower(0);
-                        backLeft.setPower(0);
-                        */
+
                     }
                     while (detector.getXPosition() > 300) {
                         //code for moving the robot forward to meet gold block
