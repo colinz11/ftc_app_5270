@@ -120,6 +120,28 @@ import com.qualcomm.robotcore.util.ElapsedTime;
              * And Position
              */
             while (opModeIsActive() && (runtime.seconds() < 27)) {
+                while(detector.getAligned() == false) {
+                    detector.getXPosition();
+                    while (detector.isFound() == false) {
+                       //code for moving the robot to find gold blocks
+                        /* backRight.setPower(-.5);
+                        frontLeft.setPower(.5);
+                        frontRight.setPower(.5);
+                        backLeft.setPower(-.5);
+
+                        backRight.setPower(0);
+                        frontLeft.setPower(0);
+                        frontRight.setPower(0);
+                        backLeft.setPower(0);
+                        */
+                    }
+                    while (detector.getXPosition() > 300) {
+                        //code for moving the robot forward to meet gold block
+                    }
+                }
+                //General code for knocking block (Lower Arm and turn robot to knock the block
+
+
                 telemetry.addData("IsAligned", detector.getAligned()); // Is the bot aligned with the gold mineral?
                 telemetry.addData("X Pos", detector.getXPosition()); // Gold X position.
 
