@@ -4,17 +4,28 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+//import com.github.pmtischler.control.Pid;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
 
 @TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
-    public class mecanumWheelsTest extends OpMode {
+public class mecanumWheelsTest extends OpMode {
 
-        final double K = 1f;
-        final double drivePower = 1;
+    final double K = 1f;
+    final double drivePower = 1;
+
+    private final double drivePidKp = 1;     // Tuning variable for PID.
+    private final double drivePidTi = 1.0;   // Eliminate integral error in 1 sec.
+    private final double drivePidTd = 0.1;   // Account for error in 0.1 sec.
+    // Protect against integral windup by limiting integral term.
+    private final double drivePidIntMax = 1;  // Limit to max speed.
+    private final double driveOutMax = 1.0;  // Motor output limited to 100%.
+    private final double ticksPerRevolution = 1120;  // Get for your motor and gearing.
+    private double prevTime;  // The last time loop() was called.
+    private int prevArmEncoderPosition;   // Encoder tick at last call to loop().
+
 
 
 // Declare OpMode members.
@@ -52,7 +63,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
-
+            prevTime = 0;
+            prevArmEncoderPosition = intakeArm.getCurrentPosition();
             // Tell the driver that initialization is complete.
             telemetry.addData("Status", "Initialized");
         }
@@ -64,7 +76,13 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
 
         public void loop() {
+            double deltaTime = time - prevTime;
 
+            double armSpeed = (intakeArm.getCurrentPosition() - prevArmEncoderPosition) /
+                    deltaTime;
+            // Track last loop() values.
+            prevTime = time;
+            prevArmEncoderPosition = intakeArm.getCurrentPosition();
             if(gamepad2.a)
                 intake.setPower(.75);
             else if(gamepad2.b)
