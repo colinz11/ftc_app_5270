@@ -116,11 +116,12 @@ public class mecanumWheelsTest extends OpMode {
             if (Math.abs(rear_right)>max) max = Math.abs(rear_right);
             if (max>1)
             {front_left/=max; front_right/=max; rear_left/=max; rear_right/=max;}
-
-            frontLeft.setPower(front_left * drivePower);
+            Power(front_left * drivePower);
             frontRight.setPower(front_right * drivePower);
             backRight.setPower( rear_right* drivePower);
             backLeft.setPower(rear_left * drivePower);
             
         }
 }
+
+            frontLeft.set
