@@ -105,10 +105,11 @@ public class mecanumWheelsTest extends OpMode {
                 armExtension.setPower(0);
 
 
-            if(gamepad2.right_stick_y > .1)
+            if(gamepad2.right_stick_y > .1) {
                 intakeArm.setPower(-.25);
                 int target = 180;
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition()+ target);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + target);
+            }
             else if(gamepad2.right_stick_y < -.1)
                 intakeArm.setPower(.5);
             else
