@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.teamcode.Pid;
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
 
@@ -14,16 +14,6 @@ public class mecanumWheelsTest extends OpMode {
 
     final double K = 1f;
     final double drivePower = 1;
-
-    private final double drivePidKp = 1;     // Tuning variable for PID.
-    private final double drivePidTi = 1.0;   // Eliminate integral error in 1 sec.
-    private final double drivePidTd = 0.1;   // Account for error in 0.1 sec.
-    // Protect against integral windup by limiting integral term.
-    private final double drivePidIntMax = 1;  // Limit to max speed.
-    private final double driveOutMax = 1.0;  // Motor output limited to 100%.
-    private final double ticksPerRevolution = 1120;  // Get for your motor and gearing.
-    private double prevTime;  // The last time loop() was called.
-    private int prevArmEncoderPosition;   // Encoder tick at last call to loop().
 
 
 
@@ -38,7 +28,6 @@ public class mecanumWheelsTest extends OpMode {
        // private DcMotor intake = null;
         private CRServo intake = null;
         private DcMotor intakeArm = null;
-
 
         @Override
         public void init() {
@@ -62,9 +51,6 @@ public class mecanumWheelsTest extends OpMode {
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
-            prevTime = 0;
-            prevArmEncoderPosition = intakeArm.getCurrentPosition();
-            // Tell the driver that initialization is complete.
             telemetry.addData("Status", "Initialized");
         }
 
@@ -75,13 +61,6 @@ public class mecanumWheelsTest extends OpMode {
 
 
         public void loop() {
-            double deltaTime = time - prevTime;
-
-            double armSpeed = (intakeArm.getCurrentPosition() - prevArmEncoderPosition) /
-                    deltaTime;
-            // Track last loop() values.
-            prevTime = time;
-            prevArmEncoderPosition = intakeArm.getCurrentPosition();
             if(gamepad2.a)
                 intake.setPower(.75);
             else if(gamepad2.b)
@@ -110,6 +89,7 @@ public class mecanumWheelsTest extends OpMode {
                 intakeArm.setPower(.5);
             else
                 intakeArm.setPower(0);
+
 
             Drive();
 
