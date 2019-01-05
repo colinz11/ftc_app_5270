@@ -18,15 +18,14 @@ public class mecanumWheelsTest extends OpMode {
 
 
 // Declare OpMode members.
-        private ElapsedTime runtime = new ElapsedTime();
+     //  private ElapsedTime runtime = new ElapsedTime();
         private DcMotor frontLeft = null;
         private DcMotor frontRight = null;
         private DcMotor backLeft = null;
         private DcMotor backRight = null;
         private DcMotor lift = null;
         private DcMotor armExtension = null;
-       // private DcMotor intake = null;
-        private CRServo intake = null;
+        private DcMotor intake = null;
         private DcMotor intakeArm = null;
 
         @Override
@@ -42,22 +41,17 @@ public class mecanumWheelsTest extends OpMode {
             backRight  = hardwareMap.get(DcMotor.class, "backRight");
             lift = hardwareMap.get(DcMotor.class, "lift");
             armExtension = hardwareMap.get(DcMotor.class, "armExtension");
-           // intake = hardwareMap.get(DcMotor.class, "intake");
-            intake = hardwareMap.get(CRServo.class, "intakes");
+            intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
-            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
-
+            intakeArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             telemetry.addData("Status", "Initialized");
-        }
 
-        @Override
-        public void start() {
-            runtime.reset();
         }
 
 
@@ -77,20 +71,18 @@ public class mecanumWheelsTest extends OpMode {
                 lift.setPower(0);
 
             if(gamepad2.right_trigger > .1)
-                armExtension.setPower(.4);
+                armExtension.setPower(.5);
             else if(gamepad2.left_trigger > .1)
-                 armExtension.setPower(-.4);
+                 armExtension.setPower(-.5);
             else
                 armExtension.setPower(0);
 
 
-            if(gamepad2.right_stick_y > .1) {
-                intakeArm.setPower(-.25);
-                int target = 180;
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + target);
-            }
+
+            if(gamepad2.right_stick_y > .1)
+                intakeArm.setPower(-.4);
             else if(gamepad2.right_stick_y < -.1)
-                intakeArm.setPower(.5);
+                intakeArm.setPower(.4);
             else
                 intakeArm.setPower(0);
 
@@ -116,12 +108,11 @@ public class mecanumWheelsTest extends OpMode {
             if (Math.abs(rear_right)>max) max = Math.abs(rear_right);
             if (max>1)
             {front_left/=max; front_right/=max; rear_left/=max; rear_right/=max;}
-            Power(front_left * drivePower);
+            frontLeft.setPower(front_left * drivePower);
             frontRight.setPower(front_right * drivePower);
             backRight.setPower( rear_right* drivePower);
             backLeft.setPower(rear_left * drivePower);
-            
+
         }
 }
 
-            frontLeft.set
