@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-@Autonomous(name="mecanum time drive", group="Mecanum")
+@Autonomous(name="autonomous", group="Mecanum")
     public class AutoTest extends LinearOpMode
 {
 

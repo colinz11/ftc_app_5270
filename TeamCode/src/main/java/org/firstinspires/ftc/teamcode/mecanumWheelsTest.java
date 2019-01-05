@@ -2,14 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.teamcode.Pid;
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
 
-@TeleOp(name="mecanumWheelsTest", group="Iterative Opmode")
+@TeleOp(name="mecanumWheels", group="Iterative Opmode")
 public class mecanumWheelsTest extends OpMode {
 
     final double K = 1f;
@@ -80,9 +77,9 @@ public class mecanumWheelsTest extends OpMode {
 
 
             if(gamepad2.right_stick_y > .1)
-                intakeArm.setPower(-.4);
+                intakeArm.setPower(-.2);
             else if(gamepad2.right_stick_y < -.1)
-                intakeArm.setPower(.4);
+                intakeArm.setPower(.2);
             else
                 intakeArm.setPower(0);
 

@@ -6,7 +6,7 @@ import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-@TeleOp(name="GoldAlign Example", group="DogeCV")
+@TeleOp(name="DO NOT USE", group="DogeCV")
 
 public class DodgeCVtest extends OpMode
 {
