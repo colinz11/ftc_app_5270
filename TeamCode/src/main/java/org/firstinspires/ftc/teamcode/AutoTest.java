@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-@Autonomous(name="autonomous", group="Mecanum")
+@Autonomous(name="mecanumAutonomous", group="Mecanum")
     public class AutoTest extends LinearOpMode
 {
 
@@ -51,7 +51,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             // Tell the driver that initialization is complete.
             telemetry.addData("Status", "Initialized");
                 waitForStart();
-            lift.setPower(-1);
+            lift.setPower(1);
             runtime.reset();
             while (opModeIsActive() && (runtime.seconds() < 6.6))
             {
@@ -118,33 +118,35 @@ import com.qualcomm.robotcore.util.ElapsedTime;
              * And Position
              */
             while (opModeIsActive() && (runtime.seconds() < 27)) {
-                while(detector.getAligned() == false) {
-                    detector.getXPosition();
-                    while (detector.isFound() == false) {
-                       //code for moving the robot to find gold blocks
+                if(detector.isFound() == false) {
                         runtime.reset();
                         backRight.setPower(1);
-                        while (opModeIsActive() && (runtime.seconds() < 1.5))
-                        {
-                            telemetry.addData("Path", "Lowering", runtime.seconds());
+                        backLeft.setPower(-1);
+                        frontRight.setPower(1);
+                        frontLeft.setPower(-1);
+                        while (opModeIsActive() && (runtime.seconds() < .5) && detector.isFound() ==false) {
+                            telemetry.addData("Path", "Locating Gold", runtime.seconds());
+                            telemetry.update();
+                        }
+                        runtime.reset();
+                        backRight.setPower(-1);
+                        backLeft.setPower(1);
+                        frontRight.setPower(-1);
+                        frontLeft.setPower(1);
+                        while (opModeIsActive() && (runtime.seconds() < 1) && detector.isFound() ==false) {
+                            telemetry.addData("Path", "Locating Gold", runtime.seconds());
                             telemetry.update();
                         }
 
-
-                    }
-                    while (detector.getXPosition() > 300) {
-                        //code for moving the robot forward to meet gold block
-                    }
                 }
-                //General code for knocking block (Lower Arm and turn robot to knock the block
-
-
-                telemetry.addData("IsAligned", detector.getAligned()); // Is the bot aligned with the gold mineral?
-                telemetry.addData("X Pos", detector.getXPosition()); // Gold X position.
+                telemetry.addData("Block Status:", "Located", runtime.seconds());
+                //code for moving the robot to find gold blocks
+            }
+            //General code for knocking block (Lower Arm and turn robot to knock the block
 
                 // Disable the detector
                 detector.disable();
-            }
+
         }
 }
 
