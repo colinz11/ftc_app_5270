@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-@Autonomous(name="mecanumAutonomous", group="Mecanum")
-    public class AutoTest extends LinearOpMode {
+@Autonomous(name="autoFinal", group="Mecanum")
+public class autoFinal extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor frontLeft = null;
@@ -49,24 +49,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         waitForStart();
-        lift.setPower(1);
+
+        //Move the bot forward
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 6.6)) {
-            telemetry.addData("Path", "Lowering", runtime.seconds());
+        backRight.setPower(1);
+        backLeft.setPower(1);
+        frontRight.setPower(1);
+        frontLeft.setPower(1);
+        while (opModeIsActive() && (runtime.seconds() < .25)) {
+            telemetry.addData("Path:", "Moving Forward", runtime.seconds());
             telemetry.update();
         }
-        lift.setPower(0);
-
-        runtime.reset();
-        backRight.setPower(-.5);
-        frontLeft.setPower(.5);
-        frontRight.setPower(.5);
-        backLeft.setPower(-.5);
-        while (opModeIsActive() && (runtime.seconds() < 1)) {
-            telemetry.addData("Path", "Lowering", runtime.seconds());
-            telemetry.update();
-        }
-
         backRight.setPower(0);
         frontLeft.setPower(0);
         frontRight.setPower(0);
