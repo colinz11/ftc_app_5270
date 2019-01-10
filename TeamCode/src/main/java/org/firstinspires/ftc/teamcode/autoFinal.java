@@ -117,6 +117,18 @@ public class autoFinal extends LinearOpMode {
                 }
             }
             telemetry.addData("Block Status:", "Located", runtime.seconds());
+
+            runtime.reset();
+            backRight.setPower(1);
+            backLeft.setPower(1);
+            frontRight.setPower(1);
+            frontLeft.setPower(1);
+            while (opModeIsActive() && (runtime.seconds() < .5)) {
+                telemetry.addData("Block Status:", "Moving Forward", runtime.seconds());
+                telemetry.update();
+            }
+
+
             //code for aligning the robot
             if (detector.getAligned() == false) {
                 runtime.reset();
@@ -124,7 +136,7 @@ public class autoFinal extends LinearOpMode {
                 backLeft.setPower(-1);
                 frontRight.setPower(1);
                 frontLeft.setPower(-1);
-                while (opModeIsActive() && (runtime.seconds() < .25) && detector.getAligned() == false) {
+                while (opModeIsActive() && (runtime.seconds() < .5) && detector.getAligned() == false) {
                     telemetry.addData("Block Status:", "Aligning Gold", runtime.seconds());
                     telemetry.update();
                 }
@@ -144,12 +156,14 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < 1)) {
+            while (opModeIsActive() && (runtime.seconds() < .5)) {
                 telemetry.addData("Block Status:", "Knocking gold", runtime.seconds());
                 telemetry.update();
             }
             // Disable the detector
             detector.disable();
+
+            //Drive into the crater
 
             break;
         }
