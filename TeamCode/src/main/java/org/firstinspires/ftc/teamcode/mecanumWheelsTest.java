@@ -40,7 +40,7 @@ public class mecanumWheelsTest extends OpMode {
             armExtension = hardwareMap.get(DcMotor.class, "armExtension");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
-            intakeArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             // Most robots need the motor on one side to be reversed to drive forward
             // Reverse the motor that runs backwards when connected directly to the battery
             intakeArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -75,13 +75,13 @@ public class mecanumWheelsTest extends OpMode {
                 armExtension.setPower(0);
 
 
-
+            intakeArm.setPower(.2);
             if(gamepad2.right_stick_y > .1)
-                intakeArm.setPower(-.2);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 1);
             else if(gamepad2.right_stick_y < -.1)
-                intakeArm.setPower(.2);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 1);
             else
-                intakeArm.setPower(0);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
 
 
             Drive();
