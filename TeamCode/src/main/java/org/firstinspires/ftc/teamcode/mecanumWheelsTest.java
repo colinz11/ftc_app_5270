@@ -38,13 +38,16 @@ public class mecanumWheelsTest extends OpMode {
             armExtension = hardwareMap.get(DcMotor.class, "armExtension");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
+
+            //reset encoder position the set mode to run_to_position
+            intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
             //Set on side of the robot's motors to reverse
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
-            //Display Initilized
+            //Display Initialized
             telemetry.addData("Status", "Initialized");
 
         }
@@ -83,8 +86,8 @@ public class mecanumWheelsTest extends OpMode {
                 intakeArm.setPower(.2);
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 10);//set the target position to 10 more
             }
-         //   else //if no input, set target to current position (PROBABLY DOESN'T WORK AS POS IS CONSTANTLY UPDATE SO IT MAY DO NOTHING)
-         //       intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
+           else //if no input, set target to current position (PROBABLY DOESN'T WORK AS POS IS CONSTANTLY UPDATE SO IT MAY DO NOTHING)
+               intakeArm.setPower(0);
 
 
             Drive();
