@@ -75,13 +75,17 @@ public class mecanumWheelsTest extends OpMode {
                 armExtension.setPower(0);
 
 
-            intakeArm.setPower(.4);
-            if(gamepad2.right_stick_y > .1)
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 10);
-            else if(gamepad2.right_stick_y < -.1)
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 10);
-            else
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
+
+            if(gamepad2.right_stick_y > .1) {
+                intakeArm.setPower(.2); //Set motor power to .2
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 10);//set the target position to 10 less
+            }
+            else if(gamepad2.right_stick_y < -.1) {
+                intakeArm.setPower(.2);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 10);//set the target position to 10 more
+            }
+         //   else //if no input, set target to current position (PROBABLY DOESN'T WORK AS POS IS CONSTANTLY UPDATE SO IT MAY DO NOTHING)
+         //       intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
 
 
             Drive();
