@@ -49,7 +49,7 @@ public class mecanumWheelsTest extends OpMode {
             backRight.setDirection(DcMotor.Direction.REVERSE);
             //Display Initialized
             telemetry.addData("Status", "Initialized");
-
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
         }
 
 
@@ -78,14 +78,14 @@ public class mecanumWheelsTest extends OpMode {
 
 
             //move the intake arm
+            intakeArm.setPower(1); //Set motor power to .5
+
             if(gamepad2.right_stick_y > .1) {
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 10);//set the target position to 10 less
-                intakeArm.setPower(.5); //Set motor power to .2
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 20);//set the target position to 10 less
                 telemetry.addData("Target Position", intakeArm.getCurrentPosition() - 20);
             }
             else if(gamepad2.right_stick_y < -.1) {
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 10);//set the target position to 10 more
-                intakeArm.setPower(.5);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 20);//set the target position to 10 more
                 telemetry.addData("Target Position", intakeArm.getCurrentPosition() + 20);
             }
 
