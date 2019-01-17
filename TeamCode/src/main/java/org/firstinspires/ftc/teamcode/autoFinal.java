@@ -162,9 +162,23 @@ public class autoFinal extends LinearOpMode {
             }
             // Disable the detector
             detector.disable();
-
-            //Drive into the crater
-
+            //To Depot
+            backRight.setPower(1);
+            backLeft.setPower(1);
+            frontRight.setPower(1);
+            frontLeft.setPower(1);
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
+                telemetry.addData("Depot Status:", "Moving Forward", runtime.seconds());
+                telemetry.update();
+            }
+            backRight.setPower(1);
+            backLeft.setPower(1);
+            frontRight.setPower(-1);
+            frontLeft.setPower(-1);
+            while (opModeIsActive() && (runtime.seconds() < 2)) {
+                telemetry.addData("Depot Status:", "Strafing To Depot", runtime.seconds());
+                telemetry.update();
+            }
             break;
         }
 
