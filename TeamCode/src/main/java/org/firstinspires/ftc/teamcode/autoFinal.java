@@ -132,20 +132,20 @@ public class autoFinal extends LinearOpMode {
             //code for aligning the robot
             if (detector.getAligned() == false) {
                 runtime.reset();
-                backRight.setPower(1);
-                backLeft.setPower(-1);
-                frontRight.setPower(1);
-                frontLeft.setPower(-1);
-                while (opModeIsActive() && (runtime.seconds() < .5) && detector.getAligned() == false) {
+                backRight.setPower(0.05);
+                backLeft.setPower(-0.05);
+                frontRight.setPower(0.05);
+                frontLeft.setPower(-0.05);
+                while (opModeIsActive() && detector.getAligned() == false && (detector.getXPosition() < 200)) {
                     telemetry.addData("Block Status:", "Aligning Gold", runtime.seconds());
                     telemetry.update();
                 }
                 runtime.reset();
-                backRight.setPower(-1);
-                backLeft.setPower(1);
-                frontRight.setPower(-1);
-                frontLeft.setPower(1);
-                while (opModeIsActive() && (runtime.seconds() < .5) && detector.getAligned() == false) {
+                backRight.setPower(-0.05);
+                backLeft.setPower(0.05);
+                frontRight.setPower(-0.05);
+                frontLeft.setPower(0.05);
+                while (opModeIsActive() && detector.getAligned() == false && (detector.getXPosition() < 25)) {
                     telemetry.addData("Block Status:", "Aligning Gold", runtime.seconds());
                     telemetry.update();
                 }
