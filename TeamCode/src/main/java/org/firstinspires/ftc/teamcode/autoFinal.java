@@ -97,6 +97,8 @@ public class autoFinal extends LinearOpMode {
          */
         while (opModeIsActive() && (runtime.seconds() < 27)) {
             double xpos = 0;
+            xpos = detector.getXPosition();
+
             if (detector.isFound() == false) {
                 runtime.reset();
                 backRight.setPower(1);
@@ -132,8 +134,6 @@ public class autoFinal extends LinearOpMode {
 
             //code for aligning the robot
             if (detector.getAligned() == false) {
-
-                xpos = detector.getXPosition();
 
                 runtime.reset();
                 backRight.setPower(0.05);
@@ -188,7 +188,7 @@ public class autoFinal extends LinearOpMode {
                     telemetry.update();
                 }
             }
-            //if loop here &determine x pos
+            //if loop here determine x pos
             backRight.setPower(1);
             backLeft.setPower(1);
             frontRight.setPower(1);
