@@ -45,8 +45,8 @@ public class mecanumWheelsTest extends OpMode {
 
 
             //Set on side of the robot's motors to reverse
-            frontRight.setDirection(DcMotor.Direction.REVERSE);
-            backRight.setDirection(DcMotor.Direction.REVERSE);
+            frontLeft.setDirection(DcMotor.Direction.REVERSE);
+            backLeft.setDirection(DcMotor.Direction.REVERSE);
             //Display Initialized
             telemetry.addData("Status", "Initialized");
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
@@ -118,5 +118,6 @@ public class mecanumWheelsTest extends OpMode {
             backLeft.setPower(rear_left * drivePower);
 
         }
+
 }
 
