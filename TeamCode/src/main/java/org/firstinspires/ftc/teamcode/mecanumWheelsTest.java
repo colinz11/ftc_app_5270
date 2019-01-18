@@ -100,7 +100,7 @@ public class mecanumWheelsTest extends OpMode {
             double right = gamepad1.left_stick_x; // push joystick1 to the right to strafe right
             double clockwise = gamepad1.right_stick_x; // push joystick2 to the right to rotate clockwise
 
-
+//meese update
             double front_left = forward  + right + K*clockwise;
             double front_right = forward - right - K*clockwise;
             double rear_left = forward - right + K*clockwise;
