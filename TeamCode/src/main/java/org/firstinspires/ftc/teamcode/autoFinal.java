@@ -182,7 +182,8 @@ public class autoFinal extends LinearOpMode {
                 backRight.setPower(-1);
                 backLeft.setPower(1);
                 frontRight.setPower(-1);
-                frontLeft.setPower(1);
+                frontLeft.setPower(1);'
+                '
                 while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Depot Status:", "Turning", runtime.seconds());
                     telemetry.update();
