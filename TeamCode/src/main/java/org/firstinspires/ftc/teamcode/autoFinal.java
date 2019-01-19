@@ -96,7 +96,7 @@ public class autoFinal extends LinearOpMode {
          * And Position
          */
         while (opModeIsActive() && (runtime.seconds() < 27)) {
-            int goldpos = 0;
+            double xpos = detector.getXPosition();
             if (detector.isFound() == false) {
                 runtime.reset();
                 backRight.setPower(1);
@@ -129,17 +129,14 @@ public class autoFinal extends LinearOpMode {
                 telemetry.update();
             }
 
-
             //code for aligning the robot
             if (detector.getAligned() == false) {
-                goldpos = 2;
                 runtime.reset();
                 backRight.setPower(0.05);
                 backLeft.setPower(-0.05);
                 frontRight.setPower(0.05);
                 frontLeft.setPower(-0.05);
                 while (opModeIsActive() && detector.getAligned() == false && (detector.getXPosition() < 200)) {
-                    goldpos = 3;
                     telemetry.addData("Block Status:", "Aligning Gold", runtime.seconds());
                     telemetry.update();
                 }
@@ -150,7 +147,6 @@ public class autoFinal extends LinearOpMode {
                 frontLeft.setPower(0.05);
                 while (opModeIsActive() && detector.getAligned() == false && (detector.getXPosition() < 25)) {
                     telemetry.addData("Block Status:", "Aligning Gold", runtime.seconds());
-                    goldpos = 1;
                     telemetry.update();
                 }
             }
@@ -166,74 +162,58 @@ public class autoFinal extends LinearOpMode {
             }
             // Disable the detector
             detector.disable();
-            //To Depot
-            if (goldpos == 2) {
+
+            //Turn To Depot
+            if(xpos < 150) {
+                runtime.reset();
+                backRight.setPower(-1);
+                backLeft.setPower(1);
+                frontRight.setPower(-1);
+                frontLeft.setPower(1);
+                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                    telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
+                    telemetry.update();
+                }
+            }
+
+            if(xpos >= 150 && xpos < 350) {
                 runtime.reset();
                 backRight.setPower(1);
                 backLeft.setPower(1);
                 frontRight.setPower(1);
                 frontLeft.setPower(1);
-                while (opModeIsActive() && (runtime.seconds() < 1)) {
-                    telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
+                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                    telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
                     telemetry.update();
                 }
             }
 
-            if (goldpos == 1) {
+            if(xpos >= 350) {
                 runtime.reset();
-                backRight.setPower(-1);
-                backLeft.setPower(1);
-                frontRight.setPower(-1);
-
-                frontLeft.setPower(1);
-
-                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
-                    telemetry.addData("Depot Status:", "Turning", runtime.seconds());
-
-                    frontLeft.setPower(1);
-                    while (opModeIsActive() && (runtime.seconds() < 0.25)) {
-                        telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
-                        telemetry.update();
-                    }
-
-                    runtime.reset();
-                    backRight.setPower(1);
-                    backLeft.setPower(1);
-                    frontRight.setPower(1);
-                    frontLeft.setPower(1);
-                    while (opModeIsActive() && (runtime.seconds() < 1)) {
-                        telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
-
-                        telemetry.update();
-                    }
+                backRight.setPower(1);
+                backLeft.setPower(-1);
+                frontRight.setPower(1);
+                frontLeft.setPower(-1);
+                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                    telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
+                    telemetry.update();
                 }
-
-                if (goldpos == 3) {
-                    runtime.reset();
-                    backRight.setPower(1);
-                    backLeft.setPower(-1);
-                    frontRight.setPower(1);
-                    frontLeft.setPower(-1);
-                    while (opModeIsActive() && (runtime.seconds() < 0.25)) {
-                        telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
-                        telemetry.update();
-                    }
-
-                    runtime.reset();
-                    backRight.setPower(1);
-                    backLeft.setPower(1);
-                    frontRight.setPower(1);
-                    frontLeft.setPower(1);
-                    while (opModeIsActive() && (runtime.seconds() < 1)) {
-                        telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
-                        telemetry.update();
-                    }
-                }
-                break;
             }
-
+            //Move into depot
+            runtime.reset();
+            backRight.setPower(1);
+            backLeft.setPower(1);
+            frontRight.setPower(1);
+            frontLeft.setPower(1);
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
+                telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
+                telemetry.update();
+            }
+            break;
         }
+
     }
 }
+
 
 
