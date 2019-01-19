@@ -5,10 +5,10 @@
     <Webcam serialNumber="BF97DF90" name="Camera"/>
     -<LynxUsbDevice parentModuleAddress="1" serialNumber="DQ2AEWVG" name="Expansion Hub Portal 1">
     -<LynxModule name="Expansion Hub 2" port="2">
-    <NeveRest40Gearmotor name="frontRight" port="3"/>
-    <NeveRest40Gearmotor name="frontLeft" port="2"/>
-    <NeveRest40Gearmotor name="backRight" port="1"/>
-    <NeveRest40Gearmotor name="backLeft" port="0"/>
+    <NeveRest40Gearmotor name="frontRight" port="0"/>
+    <NeveRest40Gearmotor name="frontLeft" port="1"/>
+    <NeveRest40Gearmotor name="backRight" port="2"/>
+    <NeveRest40Gearmotor name="backLeft" port="3"/>
     <LynxEmbeddedIMU name="imu" port="0" bus="0"/>
 </LynxModule>
     -<LynxModule name="Expansion Hub 3" port="3">
