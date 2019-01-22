@@ -164,7 +164,7 @@ public class autoFinal extends LinearOpMode {
             detector.disable();
 
             //Turn To Depot
-            if(xpos >= 350) {
+            if(xpos < 150) {
                 runtime.reset();
                 backRight.setPower(-1);
                 backLeft.setPower(1);
@@ -188,7 +188,7 @@ public class autoFinal extends LinearOpMode {
                 }
             }
 
-            if(xpos < 150) {
+            if(xpos >= 350) {
                 runtime.reset();
                 backRight.setPower(1);
                 backLeft.setPower(-1);
