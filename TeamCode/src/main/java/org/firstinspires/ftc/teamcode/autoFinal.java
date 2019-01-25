@@ -29,6 +29,7 @@ public class autoFinal extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        float totalTurnTime = 0;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -42,7 +43,6 @@ public class autoFinal extends LinearOpMode {
         intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
 
@@ -97,6 +97,7 @@ public class autoFinal extends LinearOpMode {
          */
         while (opModeIsActive() && (runtime.seconds() < 27)) {
             double xpos = detector.getXPosition();
+
             if (detector.isFound() == false) {
                 runtime.reset();
                 backRight.setPower(1);
@@ -107,6 +108,7 @@ public class autoFinal extends LinearOpMode {
                     telemetry.addData("Block Status:", "Locating Gold", runtime.seconds());
                     telemetry.update();
                 }
+                totalTurnTime -= runtime.seconds();
                 runtime.reset();
                 backRight.setPower(-1);
                 backLeft.setPower(1);
@@ -118,7 +120,7 @@ public class autoFinal extends LinearOpMode {
                 }
             }
             telemetry.addData("Block Status:", "Located", runtime.seconds());
-
+            totalTurnTime += runtime.seconds();
             runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(1);
@@ -164,18 +166,28 @@ public class autoFinal extends LinearOpMode {
             detector.disable();
 
             //Turn To Depot
-            if(xpos < 150) {
+            if(totalTurnTime <= 0) {
                 runtime.reset();
                 backRight.setPower(-1);
                 backLeft.setPower(1);
                 frontRight.setPower(-1);
                 frontLeft.setPower(1);
-                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                while (opModeIsActive() && (runtime.seconds() < -totalTurnTime)) {
                     telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
                     telemetry.update();
                 }
             }
-
+            if(totalTurnTime >= 0) {
+                runtime.reset();
+                backRight.setPower(1);
+                backLeft.setPower(-1);
+                frontRight.setPower(1);
+                frontLeft.setPower(-1);
+                while (opModeIsActive() && (runtime.seconds() < totalTurnTime)) {
+                    telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
+                    telemetry.update();
+                }
+            }
          /**   if(xpos >= 150 && xpos < 350) {
                 runtime.reset();
                 backRight.setPower(1);
