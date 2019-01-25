@@ -176,13 +176,13 @@ public class autoFinal extends LinearOpMode {
                 }
             }
 
-            if(xpos >= 150 && xpos < 350) {
+         /**   if(xpos >= 150 && xpos < 350) {
                 runtime.reset();
                 backRight.setPower(1);
                 backLeft.setPower(1);
                 frontRight.setPower(1);
                 frontLeft.setPower(1);
-                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Depot Status:", "Straight into position", runtime.seconds());
                     telemetry.update();
                 }
@@ -194,12 +194,13 @@ public class autoFinal extends LinearOpMode {
                 backLeft.setPower(-1);
                 frontRight.setPower(1);
                 frontLeft.setPower(-1);
-                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Depot Status:", "Turning Left into position", runtime.seconds());
                     telemetry.update();
                 }
             }
-            //Move into depot
+          **/
+            //Move into depot5
             runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(1);
