@@ -166,6 +166,7 @@ public class autoFinal extends LinearOpMode {
             detector.disable();
 
             //Turn To Depot
+            if(totalTurnTime <= -.25) {totalTurnTime -= .25;}
             if(totalTurnTime <= 0) {
                 runtime.reset();
                 backRight.setPower(-1);
@@ -177,6 +178,7 @@ public class autoFinal extends LinearOpMode {
                     telemetry.update();
                 }
             }
+            if(totalTurnTime >= .25) {totalTurnTime+= .25;}
             if(totalTurnTime >= 0) {
                 runtime.reset();
                 backRight.setPower(1);
