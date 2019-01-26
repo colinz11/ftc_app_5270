@@ -24,6 +24,7 @@ public class HookingTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        int targetPos = 24000;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -45,12 +46,12 @@ public class HookingTest extends LinearOpMode {
         waitForStart();
         lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        lift.setTargetPosition(1000);
+        lift.setTargetPosition(targetPos);
         lift.setPower(1);
         runtime.reset();
         lift.getTargetPosition();
 
-        while (opModeIsActive() && runtime.seconds() < 10 ) {
+        while (opModeIsActive() && lift.getCurrentPosition() < targetPos) {
             telemetry.addData("Block Status:", "Lowering: " + lift.getCurrentPosition());
             telemetry.update();
         }
