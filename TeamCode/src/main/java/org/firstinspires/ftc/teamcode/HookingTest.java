@@ -51,7 +51,7 @@ public class HookingTest extends LinearOpMode {
         lift.getTargetPosition();
 
         while (opModeIsActive() && runtime.seconds() < 10 ) {
-            telemetry.addData("Block Status:", "Lowering" + lift.getTargetPosition());
+            telemetry.addData("Block Status:", "Lowering: " + lift.getCurrentPosition());
             telemetry.update();
         }
     }
