@@ -24,7 +24,7 @@ public class HookingTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        int targetPos = 24000;
+        int targetPos = 24500;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
