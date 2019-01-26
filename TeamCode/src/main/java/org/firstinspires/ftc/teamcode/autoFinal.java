@@ -209,7 +209,7 @@ public class autoFinal extends LinearOpMode {
             }
 
             //Shake marker off of robot
-            runtime.reset();
+           /** runtime.reset();
             intakeArm.setPower(1);
             while (opModeIsActive() && (runtime.seconds() < 3)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
@@ -235,9 +235,9 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
                 telemetry.update();
             }
+**/
 
-
-   /**         runtime.reset();
+            runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(-1);
             frontRight.setPower(1);
@@ -257,7 +257,7 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
             }
-**/
+
             break;
         }
 
