@@ -211,21 +211,32 @@ public class autoFinal extends LinearOpMode {
             //Shake marker off of robot
             runtime.reset();
             intakeArm.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < 1.5)) {
+            while (opModeIsActive() && (runtime.seconds() < 3)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
                 telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
                 telemetry.update();
             }
             runtime.reset();
             intakeArm.setPower(-1);
-            while (opModeIsActive() && (runtime.seconds() < 1)) {
+            while (opModeIsActive() && (runtime.seconds() < 2)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);
                 telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
                 telemetry.update();
             }
             detector.enable(); // Start the detector!
 
-            //Locate the pit
+            //Locate the pit and turn away from gold
+            runtime.reset();
+            backRight.setPower(1);
+            backLeft.setPower(-1);
+            frontRight.setPower(1);
+            frontLeft.setPower(-1);
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
+                telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
+                telemetry.update();
+            }
+
+
             runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(-1);
