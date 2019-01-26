@@ -46,8 +46,14 @@ public class autoFinal extends LinearOpMode {
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
 
+        //reset encoder position the set mode to run_to_position
+        intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
+        intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
         waitForStart();
 
         //Move the bot forward
@@ -191,13 +197,27 @@ public class autoFinal extends LinearOpMode {
                 }
             }
 
-            //Move into depot5
+            //Move into depot
             runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
             while (opModeIsActive() && (runtime.seconds() < 1)) {
+                telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
+                telemetry.update();
+            }
+
+            //Shake marker off of robot
+            intakeArm.setPower(1);
+            while (opModeIsActive() && (runtime.seconds() < 1.5)) {
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
+                telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
+                telemetry.update();
+            }
+            intakeArm.setPower(-1);
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);
                 telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
                 telemetry.update();
             }
