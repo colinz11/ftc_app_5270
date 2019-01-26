@@ -43,6 +43,7 @@ public class HookingTest extends LinearOpMode {
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         waitForStart();
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lift.setPower(1);
         lift.setTargetPosition(5000);
