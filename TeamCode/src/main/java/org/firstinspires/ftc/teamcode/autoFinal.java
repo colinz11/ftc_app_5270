@@ -180,7 +180,7 @@ public class autoFinal extends LinearOpMode {
                 frontRight.setPower(-1);
                 frontLeft.setPower(1);
                 while (opModeIsActive() && (runtime.seconds() < -totalTurnTime)) {
-                    telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
+                    telemetry.addData("Depot Status:", "Turning into position", runtime.seconds());
                     telemetry.update();
                 }
             }
@@ -192,7 +192,7 @@ public class autoFinal extends LinearOpMode {
                 frontRight.setPower(1);
                 frontLeft.setPower(-1);
                 while (opModeIsActive() && (runtime.seconds() < totalTurnTime)) {
-                    telemetry.addData("Depot Status:", "Turning right into position", runtime.seconds());
+                    telemetry.addData("Depot Status:", "Turning into position", runtime.seconds());
                     telemetry.update();
                 }
             }
@@ -209,18 +209,44 @@ public class autoFinal extends LinearOpMode {
             }
 
             //Shake marker off of robot
+            runtime.reset();
             intakeArm.setPower(1);
             while (opModeIsActive() && (runtime.seconds() < 1.5)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
-                telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
+                telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
                 telemetry.update();
             }
+            runtime.reset();
             intakeArm.setPower(-1);
             while (opModeIsActive() && (runtime.seconds() < 1)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);
-                telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
+                telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
                 telemetry.update();
             }
+            detector.enable(); // Start the detector!
+
+            //Locate the pit
+            runtime.reset();
+            backRight.setPower(1);
+            backLeft.setPower(-1);
+            frontRight.setPower(1);
+            frontLeft.setPower(-1);
+            while (opModeIsActive() && (runtime.seconds() < 2.5) && detector.isFound() == false) {
+                telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
+                telemetry.update();
+            }
+
+            //Drive to the pit
+            runtime.reset();
+            backRight.setPower(1);
+            backLeft.setPower(1);
+            frontRight.setPower(1);
+            frontLeft.setPower(1);
+            while (opModeIsActive() && (runtime.seconds() < 3)) {
+                telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
+                telemetry.update();
+            }
+
             break;
         }
 
