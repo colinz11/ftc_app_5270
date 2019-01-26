@@ -197,7 +197,7 @@ public class autoFinal extends LinearOpMode {
                 }
             }
 
-            /**Move into depot
+            //Move into depot
             runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(1);
@@ -206,7 +206,7 @@ public class autoFinal extends LinearOpMode {
             while (opModeIsActive() && (runtime.seconds() < 1)) {
                 telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
                 telemetry.update();
-            }**/
+            }
 
             //Shake marker off of robot
             runtime.reset();
@@ -257,6 +257,13 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
             }
+            //!MOVE THIS CODE TO HOOK TEST
+            runtime.reset();
+            backRight.setPower(1);
+            backLeft.setPower(1);
+            frontRight.setPower(1);
+            frontLeft.setPower(1);
+
 
             break;
         }
