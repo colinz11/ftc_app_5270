@@ -237,7 +237,7 @@ public class autoFinal extends LinearOpMode {
             }
 
 
-            runtime.reset();
+   /**         runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(-1);
             frontRight.setPower(1);
@@ -257,14 +257,7 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
             }
-            //!MOVE THIS CODE TO HOOK TEST
-            runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(1);
-            frontRight.setPower(1);
-            frontLeft.setPower(1);
-
-
+**/
             break;
         }
 
