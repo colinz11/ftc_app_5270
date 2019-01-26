@@ -43,6 +43,8 @@ public class HookingTest extends LinearOpMode {
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         waitForStart();
+        lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        lift.setPower(1);
         lift.setTargetPosition(5000);
         while (opModeIsActive() && lift.getCurrentPosition() == lift.getTargetPosition()) {
             telemetry.addData("Block Status:", "Locating Gold", runtime.seconds());
