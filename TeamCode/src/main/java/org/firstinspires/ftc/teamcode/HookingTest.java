@@ -24,7 +24,6 @@ public class HookingTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        float totalRunTime = 0;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -44,5 +43,6 @@ public class HookingTest extends LinearOpMode {
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         waitForStart();
+        lift.setTargetPosition(5000);
     }
 }
