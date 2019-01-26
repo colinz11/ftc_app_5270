@@ -190,7 +190,7 @@ public class autoFinal extends LinearOpMode {
                     telemetry.update();
                 }
             }
-            
+
             //Move into depot5
             runtime.reset();
             backRight.setPower(1);
