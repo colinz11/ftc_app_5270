@@ -44,5 +44,9 @@ public class HookingTest extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         waitForStart();
         lift.setTargetPosition(5000);
+        while (opModeIsActive() && lift.getCurrentPosition() == lift.getTargetPosition()) {
+            telemetry.addData("Block Status:", "Locating Gold", runtime.seconds());
+            telemetry.update();
+        }
     }
 }
