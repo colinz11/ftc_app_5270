@@ -242,7 +242,7 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(-1);
             frontRight.setPower(1);
             frontLeft.setPower(-1);
-            while (opModeIsActive() && (runtime.seconds() < 2.5) && !detector.isFound()) {
+            while (opModeIsActive() && (runtime.seconds() < .5) && !detector.isFound()) {
                 telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
                 telemetry.update();
             }
