@@ -59,7 +59,7 @@ public class HookingTest extends LinearOpMode {
         frontRight.setPower(-1);
         frontLeft.setPower(-1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < .5)) {
+        while (opModeIsActive() && (runtime.seconds() < .3)) {
             telemetry.addData("Path:", "Moving Backwards", runtime.seconds());
             telemetry.update();
         }
@@ -72,7 +72,41 @@ public class HookingTest extends LinearOpMode {
             telemetry.addData("Path:", "Turning", runtime.seconds());
             telemetry.update();
         }
-
-
+        backRight.setPower(1);
+        backLeft.setPower(1);
+        frontRight.setPower(1);
+        frontLeft.setPower(1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .2)) {
+            telemetry.addData("Path:", "Moving Forwards", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(1);
+        backLeft.setPower(-1);
+        frontRight.setPower(1);
+        frontLeft.setPower(-1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .5)) {
+            telemetry.addData("Path:", "Moving Turning", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(1);
+        backLeft.setPower(-1);
+        frontRight.setPower(-1);
+        frontLeft.setPower(1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .4)) {
+            telemetry.addData("Path:", "Moving Sideways", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(0);
+        backLeft.setPower(-1);
+        frontRight.setPower(0);
+        frontLeft.setPower(-1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .2)) {
+            telemetry.addData("Path:", "Moving Turning", runtime.seconds());
+            telemetry.update();
+        }
     }
 }
