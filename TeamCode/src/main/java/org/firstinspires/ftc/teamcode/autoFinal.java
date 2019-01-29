@@ -121,15 +121,16 @@ public class autoFinal extends LinearOpMode {
             telemetry.update();
         }
         //Move the bot forward
-        runtime.reset();
         backRight.setPower(1);
         backLeft.setPower(1);
         frontRight.setPower(1);
         frontLeft.setPower(1);
-        while (opModeIsActive() && (runtime.seconds() < .2)) {
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .25)) {
             telemetry.addData("Path:", "Moving Forward", runtime.seconds());
             telemetry.update();
         }
+        runtime.reset();
         backRight.setPower(0);
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -232,8 +233,6 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Block Status:", "Knocking gold", runtime.seconds());
                 telemetry.update();
             }
-            // Disable the detector
-            detector.disable();
 
             //Turn To Depot
             if(totalTurnTime <= -.25) {totalTurnTime -= .25;}
@@ -311,7 +310,8 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
             }
-
+            // Disable the detector
+            detector.disable();
             break;
         }
 
