@@ -130,7 +130,6 @@ public class autoFinal extends LinearOpMode {
             telemetry.addData("Path:", "Moving Forward", runtime.seconds());
             telemetry.update();
         }
-        runtime.reset();
         backRight.setPower(0);
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -166,10 +165,10 @@ public class autoFinal extends LinearOpMode {
          * Check if the Robot is aligned
          * And Position
          */
-        while (opModeIsActive() && (runtime.seconds() < 27)) {
-            double xpos = detector.getXPosition();
+        runtime.reset();
 
-            if (detector.isFound() == false) {
+
+            while (detector.isFound() == false) {
                 runtime.reset();
                 backRight.setPower(1);
                 backLeft.setPower(-1);
@@ -312,10 +311,9 @@ public class autoFinal extends LinearOpMode {
             }
             // Disable the detector
             detector.disable();
-            break;
         }
 
-    }
+
 }
 
 
