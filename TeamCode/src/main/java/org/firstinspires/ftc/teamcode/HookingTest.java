@@ -24,7 +24,7 @@ public class HookingTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        int targetPos = 34000;
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -44,6 +44,7 @@ public class HookingTest extends LinearOpMode {
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         waitForStart();
+        int targetPos = 34000;
         lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lift.setTargetPosition(targetPos);

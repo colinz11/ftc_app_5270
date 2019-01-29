@@ -49,13 +49,77 @@ public class autoFinal extends LinearOpMode {
         //reset encoder position the set mode to run_to_position
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        int targetPos = 34000;
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
         waitForStart();
 
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        lift.setTargetPosition(targetPos);
+        lift.setPower(1);
+        runtime.reset();
+        lift.getTargetPosition();
+        while (opModeIsActive() && lift.getCurrentPosition() < targetPos) {
+            telemetry.addData("Auto Stat:", "Lowering: " + lift.getCurrentPosition());
+            telemetry.update();
+        }
+        backRight.setPower(-1);
+        backLeft.setPower(-1);
+        frontRight.setPower(-1);
+        frontLeft.setPower(-1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .3)) {
+            telemetry.addData("Path:", "Moving Backwards", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(1);
+        backLeft.setPower(-.5);
+        frontRight.setPower(1);
+        frontLeft.setPower(-.5);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 1)) {
+            telemetry.addData("Path:", "Turning", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(1);
+        backLeft.setPower(1);
+        frontRight.setPower(1);
+        frontLeft.setPower(1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .2)) {
+            telemetry.addData("Path:", "Moving Forwards", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(1);
+        backLeft.setPower(-1);
+        frontRight.setPower(1);
+        frontLeft.setPower(-1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .5)) {
+            telemetry.addData("Path:", "Moving Turning", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(1);
+        backLeft.setPower(-1);
+        frontRight.setPower(-1);
+        frontLeft.setPower(1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .4)) {
+            telemetry.addData("Path:", "Moving Sideways", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(0);
+        backLeft.setPower(-1);
+        frontRight.setPower(0);
+        frontLeft.setPower(-1);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .2)) {
+            telemetry.addData("Path:", "Moving Turning", runtime.seconds());
+            telemetry.update();
+        }
         //Move the bot forward
         runtime.reset();
         backRight.setPower(1);
