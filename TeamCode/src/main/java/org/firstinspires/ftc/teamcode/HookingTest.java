@@ -24,7 +24,7 @@ public class HookingTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        int targetPos = 25000;
+        int targetPos = 23000;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -58,15 +58,17 @@ public class HookingTest extends LinearOpMode {
         backLeft.setPower(-1);
         frontRight.setPower(-1);
         frontLeft.setPower(-1);
+        runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < .1)) {
             telemetry.addData("Path:", "Moving Backwards", runtime.seconds());
             telemetry.update();
         }
         backRight.setPower(1);
-        backLeft.setPower(1);
-        frontRight.setPower(-1);
+        backLeft.setPower(-1);
+        frontRight.setPower(1);
         frontLeft.setPower(-1);
-        while (opModeIsActive() && (runtime.seconds() < .2)) {
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < .4)) {
             telemetry.addData("Path:", "Turning", runtime.seconds());
             telemetry.update();
         }
