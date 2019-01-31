@@ -165,8 +165,6 @@ public class autoFinal extends LinearOpMode {
          * Check if the Robot is aligned
          * And Position
          */
-        runtime.reset();
-
 
             while (detector.isFound() == false) {
                 runtime.reset();
@@ -188,9 +186,9 @@ public class autoFinal extends LinearOpMode {
                     telemetry.addData("Block Status:", "Locating Gold", runtime.seconds());
                     telemetry.update();
                 }
+                totalTurnTime += runtime.seconds();
             }
             telemetry.addData("Block Status:", "Located", runtime.seconds());
-            totalTurnTime += runtime.seconds();
             runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(1);
