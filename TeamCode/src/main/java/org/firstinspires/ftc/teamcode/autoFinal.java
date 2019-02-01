@@ -263,7 +263,7 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < 1)) {
+            while (opModeIsActive() && (runtime.seconds() < 1.1)) {
                 telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
                 telemetry.update();
             }
@@ -309,6 +309,19 @@ public class autoFinal extends LinearOpMode {
             }
             // Disable the detector
             detector.disable();
+        runtime.reset();
+        backRight.setPower(1);
+        backLeft.setPower(-1);
+        frontRight.setPower(1);
+        frontLeft.setPower(-1);
+        while (opModeIsActive() && (runtime.seconds() < 2)) {
+            telemetry.addData("Crater Status:", "Turning into crater", runtime.seconds());
+            telemetry.update();
+        }
+        backRight.setPower(0);
+        backLeft.setPower(0);
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
         }
 
 
