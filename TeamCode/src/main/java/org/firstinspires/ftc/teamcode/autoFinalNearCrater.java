@@ -9,8 +9,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
-
 @Autonomous(name="Autonomus Crater Side", group="Mecanum")
 public class autoFinalNearCrater extends LinearOpMode {
 

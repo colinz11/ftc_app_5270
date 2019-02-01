@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-@Autonomous(name="autoFinal", group="Mecanum")
+@Autonomous(name="Autonomus Far Crater Side", group="Mecanum")
 public class autoFinal extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -194,7 +194,7 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < .5)) {
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
                 telemetry.addData("Block Status:", "Moving Forward", runtime.seconds());
                 telemetry.update();
             }
