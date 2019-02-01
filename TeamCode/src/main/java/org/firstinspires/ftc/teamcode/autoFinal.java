@@ -194,7 +194,7 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < 1)) {
+            while (opModeIsActive() && (runtime.seconds() < .75)) {
                 telemetry.addData("Block Status:", "Moving Forward", runtime.seconds());
                 telemetry.update();
             }
