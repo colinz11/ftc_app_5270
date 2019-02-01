@@ -10,10 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-
 @Autonomous(name="Autonomus Far Crater Side", group="Mecanum")
 public class autoFinal extends LinearOpMode {
-
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor frontLeft = null;
     private DcMotor frontRight = null;
@@ -292,7 +290,7 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(-1);
             frontRight.setPower(1);
             frontLeft.setPower(-1);
-            while (opModeIsActive() && (runtime.seconds() < 1.75) && !detector.isFound()) {
+            while (opModeIsActive() && (runtime.seconds() < 1.25) && !detector.isFound()) {
                 telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
                 telemetry.update();
             }
