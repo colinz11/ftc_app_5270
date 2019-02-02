@@ -305,8 +305,8 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
             }
-            // Disable the detector
-            detector.disable();
+        // Disable the detector
+        detector.disable();
         runtime.reset();
         backRight.setPower(1);
         backLeft.setPower(-1);

@@ -224,91 +224,30 @@ public class autoFinalNearCrater extends LinearOpMode {
         backLeft.setPower(1);
         frontRight.setPower(1);
         frontLeft.setPower(1);
-        while (opModeIsActive() && (runtime.seconds() < 1)) {
+        while (opModeIsActive() && (runtime.seconds() < .75)) {
             telemetry.addData("Block Status:", "Knocking gold", runtime.seconds());
             telemetry.update();
         }
-
-        //Turn To Depot
-        if(totalTurnTime <= -.25) {totalTurnTime -= .25;}
-        if(totalTurnTime <= 0) {
-            runtime.reset();
-            backRight.setPower(-1);
-            backLeft.setPower(1);
-            frontRight.setPower(-1);
-            frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < -totalTurnTime)) {
-                telemetry.addData("Depot Status:", "Turning into position", runtime.seconds());
-                telemetry.update();
-            }
-        }
-        if(totalTurnTime >= .25) {totalTurnTime+= .25;}
-        if(totalTurnTime >= 0) {
-            runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(-1);
-            frontRight.setPower(1);
-            frontLeft.setPower(-1);
-            while (opModeIsActive() && (runtime.seconds() < totalTurnTime)) {
-                telemetry.addData("Depot Status:", "Turning into position", runtime.seconds());
-                telemetry.update();
-            }
-        }
-
-        //Move into depot
-        runtime.reset();
-        backRight.setPower(1);
-        backLeft.setPower(1);
-        frontRight.setPower(1);
-        frontLeft.setPower(1);
-        while (opModeIsActive() && (runtime.seconds() < 1)) {
-            telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
-            telemetry.update();
-        }
-
-        /**Shake marker off of robot
-         runtime.reset();
-         intakeArm.setPower(1);
-         while (opModeIsActive() && (runtime.seconds() < 3)) {
-         intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
-         telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
-         telemetry.update();
-         }
-         runtime.reset();
-         intakeArm.setPower(-1);
-         while (opModeIsActive() && (runtime.seconds() < 2)) {
-         intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);
-         telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
-         telemetry.update();
-         }
-         detector.enable(); // Start the detector!
-         **/
-        //Locate the pit and turn away from gold
-
+        //code to turn around
         runtime.reset();
         backRight.setPower(1);
         backLeft.setPower(-1);
         frontRight.setPower(1);
         frontLeft.setPower(-1);
-        while (opModeIsActive() && (runtime.seconds() < 1.75) && !detector.isFound()) {
-            telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
+        while (opModeIsActive() && (runtime.seconds() < 2)) {
+            telemetry.addData("Crater Status:", "Turning into crater", runtime.seconds());
             telemetry.update();
         }
-
-        //Drive to the pit
+        //Lower the arm
         runtime.reset();
-        backRight.setPower(1);
-        backLeft.setPower(1);
-        frontRight.setPower(1);
-        frontLeft.setPower(1);
-        while (opModeIsActive() && (runtime.seconds() < 3)) {
-            telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
+        intakeArm.setPower(1);
+        while (opModeIsActive() && (runtime.seconds() < 6)) {
+            intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
+            telemetry.addData("Crater Statusp:", "Raising Arm", runtime.seconds());
             telemetry.update();
         }
-        // Disable the detector
-        detector.disable();
-    }
 
+    }
 
 }
 
