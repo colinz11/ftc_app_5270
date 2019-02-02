@@ -301,21 +301,12 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < 3)) {
+            while (opModeIsActive() && (runtime.seconds() < 3.5)) {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
             }
         // Disable the detector
         detector.disable();
-        runtime.reset();
-        backRight.setPower(1);
-        backLeft.setPower(-1);
-        frontRight.setPower(1);
-        frontLeft.setPower(-1);
-        while (opModeIsActive() && (runtime.seconds() < 2)) {
-            telemetry.addData("Crater Status:", "Turning into crater", runtime.seconds());
-            telemetry.update();
-        }
         backRight.setPower(0);
         backLeft.setPower(0);
         frontRight.setPower(0);
