@@ -105,7 +105,7 @@ public class autoFinalNearCrater extends LinearOpMode {
         frontRight.setPower(-1);
         frontLeft.setPower(1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < .5)) {
+        while (opModeIsActive() && (runtime.seconds() < .45)) {
             telemetry.addData("Path:", "Moving Sideways", runtime.seconds());
             telemetry.update();
         }
