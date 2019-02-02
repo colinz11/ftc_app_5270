@@ -157,6 +157,9 @@ public class autoFinalNearCrater extends LinearOpMode {
         detector.ratioScorer.weight = 5; //
         detector.ratioScorer.perfectRatio = 1.0; // Ratio adjustment
 
+        //vertical cropping
+        detector.verticalMax = 0.6;
+
         detector.enable(); // Start the detector!
 
         /*
