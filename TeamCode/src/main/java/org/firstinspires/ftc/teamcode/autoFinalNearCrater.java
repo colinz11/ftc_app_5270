@@ -69,7 +69,7 @@ public class autoFinalNearCrater extends LinearOpMode {
         frontRight.setPower(-1);
         frontLeft.setPower(-1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < .3)) {
+        while (opModeIsActive() && (runtime.seconds() < .25)) {
             telemetry.addData("Path:", "Moving Backwards", runtime.seconds());
             telemetry.update();
         }
@@ -105,7 +105,7 @@ public class autoFinalNearCrater extends LinearOpMode {
         frontRight.setPower(-1);
         frontLeft.setPower(1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < .4)) {
+        while (opModeIsActive() && (runtime.seconds() < .5)) {
             telemetry.addData("Path:", "Moving Sideways", runtime.seconds());
             telemetry.update();
         }
@@ -114,7 +114,7 @@ public class autoFinalNearCrater extends LinearOpMode {
         frontRight.setPower(0);
         frontLeft.setPower(-1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < .2)) {
+        while (opModeIsActive() && (runtime.seconds() < .3)) {
             telemetry.addData("Path:", "Moving Turning", runtime.seconds());
             telemetry.update();
         }
