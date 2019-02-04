@@ -9,8 +9,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
     }
-
     compileSdkVersion 26
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
