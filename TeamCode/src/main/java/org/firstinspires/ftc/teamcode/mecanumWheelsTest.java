@@ -56,9 +56,9 @@ public class mecanumWheelsTest extends OpMode {
         public void loop() {
             //run the intake forwards / backwards based on button pressed
             if(gamepad2.a)
-                intake.setPower(.75);
+                intake.setPower(1);
             else if(gamepad2.b)
-                intake.setPower(-.75);
+                intake.setPower(1);
             else
                 intake.setPower(0);
             //run the lift
