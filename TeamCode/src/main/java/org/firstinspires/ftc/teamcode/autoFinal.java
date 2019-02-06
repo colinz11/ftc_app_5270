@@ -285,7 +285,7 @@ public class autoFinal extends LinearOpMode {
 **/
             //Locate the pit and turn away from gold
 
-            runtime.reset();
+            /**runtime.reset();
             backRight.setPower(1);
             backLeft.setPower(-1);
             frontRight.setPower(1);
@@ -304,7 +304,7 @@ public class autoFinal extends LinearOpMode {
             while (opModeIsActive() && (runtime.seconds() < 3.5)) {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();
-            }
+            }**/
         // Disable the detector
         detector.disable();
         backRight.setPower(0);
