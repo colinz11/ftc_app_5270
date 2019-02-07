@@ -266,7 +266,7 @@ public class autoFinal extends LinearOpMode {
                 telemetry.update();
             }
 
-            /**Shake marker off of robot
+            //Shake marker off of robot
            runtime.reset();
             intakeArm.setPower(1);
             while (opModeIsActive() && (runtime.seconds() < 3)) {
@@ -281,8 +281,8 @@ public class autoFinal extends LinearOpMode {
                 telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
                 telemetry.update();
             }
-            detector.enable(); // Start the detector!
-**/
+            
+
             //Locate the pit and turn away from gold
 
             /**runtime.reset();
