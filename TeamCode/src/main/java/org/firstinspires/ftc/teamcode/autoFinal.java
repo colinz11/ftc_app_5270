@@ -69,7 +69,7 @@ public class autoFinal extends LinearOpMode {
         frontRight.setPower(-1);
         frontLeft.setPower(-1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < .3)) {
+        while (opModeIsActive() && (runtime.seconds() < .2)) {
             telemetry.addData("Path:", "Moving Backwards", runtime.seconds());
             telemetry.update();
         }
