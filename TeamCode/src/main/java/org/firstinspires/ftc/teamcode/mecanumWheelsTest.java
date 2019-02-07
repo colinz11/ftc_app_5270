@@ -58,7 +58,7 @@ public class mecanumWheelsTest extends OpMode {
             if(gamepad2.a)
                 intake.setPower(1);
             else if(gamepad2.b)
-                intake.setPower(1);
+                intake.setPower(-1);
             else
                 intake.setPower(0);
             //run the lift
@@ -68,7 +68,7 @@ public class mecanumWheelsTest extends OpMode {
                 lift.setPower(-1);
             else
                 lift.setPower(0);
-            //extend the arm (currently cant de-extend)
+            //extend the arm
             if(gamepad2.right_trigger > .1)
                 armExtension.setPower(.5);
             else if(gamepad2.left_trigger > .1)
@@ -78,13 +78,13 @@ public class mecanumWheelsTest extends OpMode {
 
 
             //move the intake arm
-            intakeArm.setPower(1); //Set motor power to .5
+            intakeArm.setPower(1); //Set motor power to 1
 
-            if(gamepad2.right_stick_y > .1) {
+            if(gamepad2.left_stick_y > .1) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);//set the target position to 50 less
                 telemetry.addData("Target Position", intakeArm.getCurrentPosition() - 50);
             }
-            else if(gamepad2.right_stick_y < -.1) {
+            else if(gamepad2.left_stick_y < -.1) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);//set the target position to 50 more
                 telemetry.addData("Target Position", intakeArm.getCurrentPosition() + 50);
             }
