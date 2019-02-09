@@ -47,7 +47,7 @@ public class autoFinal extends LinearOpMode {
         //reset encoder position the set mode to run_to_position
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        int targetPos = 33000;
+        int targetPos = 36000;
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -261,7 +261,7 @@ public class autoFinal extends LinearOpMode {
             backLeft.setPower(1);
             frontRight.setPower(1);
             frontLeft.setPower(1);
-            while (opModeIsActive() && (runtime.seconds() < 1.1)) {
+            while (opModeIsActive() && (runtime.seconds() < .9)) {
                 telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
                 telemetry.update();
             }
