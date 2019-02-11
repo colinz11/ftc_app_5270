@@ -11,7 +11,7 @@ public class mecanumWheelsTest extends OpMode {
     //Variables for Mecanum Wheel Drive
     final double K = 1f;
     final double drivePower = 1;
-
+    boolean encoderMode = true;
 
     //call DcMotors into play
         private DcMotor frontLeft = null;
@@ -40,8 +40,6 @@ public class mecanumWheelsTest extends OpMode {
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
 
             //reset encoder position the set mode to run_to_position
-            intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
             //Set on side of the robot's motors to reverse
@@ -76,20 +74,33 @@ public class mecanumWheelsTest extends OpMode {
             else
                 armExtension.setPower(0);
 
-
+            if(gamepad2.y)
+            {
+                intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                encoderMode = true;
+                intakeArm.setPower(1); //Set motor power to 1
+            }
             //move the intake arm
-            intakeArm.setPower(1); //Set motor power to 1
 
-            if(gamepad2.left_stick_y > .1) {
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);//set the target position to 50 less
-                telemetry.addData("Target Position", intakeArm.getCurrentPosition() - 50);
+            if(encoderMode = true) {
+                if (gamepad2.left_stick_y > .1) {
+                    intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);//set the target position to 50 less
+                    telemetry.addData("Target Position", intakeArm.getCurrentPosition() - 50);
+                } else if (gamepad2.left_stick_y < -.1) {
+                    intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);//set the target position to 50 more
+                    telemetry.addData("Target Position", intakeArm.getCurrentPosition() + 50);
+                }
             }
-            else if(gamepad2.left_stick_y < -.1) {
-                intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);//set the target position to 50 more
-                telemetry.addData("Target Position", intakeArm.getCurrentPosition() + 50);
+            else
+            {
+                if (gamepad2.left_stick_y > .1)
+                   intakeArm.setPower(-1);
+                else if (gamepad2.left_stick_y < -.1)
+                    intakeArm.setPower(1);
+                else
+                    intakeArm.setPower(0);
             }
-
-
             Drive();
 
         }
