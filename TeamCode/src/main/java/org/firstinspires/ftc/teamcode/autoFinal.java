@@ -51,9 +51,10 @@ public class autoFinal extends LinearOpMode {
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
-        intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
-        waitForStart();
-
+        while (!opModeIsActive() && !isStopRequested()) {
+            telemetry.addData("status", "waiting for start command...");
+            telemetry.update();
+        }
         lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lift.setTargetPosition(targetPos);

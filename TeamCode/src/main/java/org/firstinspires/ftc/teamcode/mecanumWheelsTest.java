@@ -81,6 +81,12 @@ public class mecanumWheelsTest extends OpMode {
                 encoderMode = true;
                 intakeArm.setPower(1); //Set motor power to 1
             }
+            if(gamepad2.x)
+            {
+                intakeArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                encoderMode = false;
+                intakeArm.setPower(0);
+            }
             //move the intake arm
 
             if(encoderMode = true) {
