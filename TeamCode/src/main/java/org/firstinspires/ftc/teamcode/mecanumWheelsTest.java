@@ -43,8 +43,8 @@ public class mecanumWheelsTest extends OpMode {
 
 
             //Set on side of the robot's motors to reverse
-            frontLeft.setDirection(DcMotor.Direction.REVERSE);
-            backLeft.setDirection(DcMotor.Direction.REVERSE);
+           // frontLeft.setDirection(DcMotor.Direction.REVERSE);
+            //backLeft.setDirection(DcMotor.Direction.REVERSE);
             //Display Initialized
             telemetry.addData("Status", "Initialized");
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
@@ -78,6 +78,7 @@ public class mecanumWheelsTest extends OpMode {
             {
                 intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
                 encoderMode = true;
                 intakeArm.setPower(1); //Set motor power to 1
             }
@@ -100,12 +101,15 @@ public class mecanumWheelsTest extends OpMode {
             }
             else
             {
-                if (gamepad2.left_stick_y > .1)
-                   intakeArm.setPower(-1);
-                else if (gamepad2.left_stick_y < -.1)
+                if (gamepad2.left_stick_y > .1) {
+                    intakeArm.setPower(-1);
+                }
+                else if (gamepad2.left_stick_y < -.1) {
                     intakeArm.setPower(1);
-                else
+                }
+                else {
                     intakeArm.setPower(0);
+                }
             }
             Drive();
 
