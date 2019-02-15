@@ -28,6 +28,7 @@ public class autoFinal extends LinearOpMode {
     @Override
     public void runOpMode() {
         float totalTurnTime = 0;
+        float drivePower = .25f;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -47,7 +48,7 @@ public class autoFinal extends LinearOpMode {
         //reset encoder position the set mode to run_to_position
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        int targetPos = 33000;
+        int targetPos = 32000;
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -65,65 +66,65 @@ public class autoFinal extends LinearOpMode {
             telemetry.addData("Auto Stat:", "Lowering: " + lift.getCurrentPosition());
             telemetry.update();
         }
-        backRight.setPower(-1);
-        backLeft.setPower(-1);
-        frontRight.setPower(-1);
-        frontLeft.setPower(-1);
+        backRight.setPower(-drivePower);
+        backLeft.setPower(-drivePower);
+        frontRight.setPower(-drivePower);
+        frontLeft.setPower(-drivePower);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .2)) {
             telemetry.addData("Path:", "Moving Backwards", runtime.seconds());
             telemetry.update();
         }
-        backRight.setPower(1);
+        backRight.setPower(drivePower);
         backLeft.setPower(-.5);
-        frontRight.setPower(1);
+        frontRight.setPower(drivePower);
         frontLeft.setPower(-.5);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 1)) {
             telemetry.addData("Path:", "Turning", runtime.seconds());
             telemetry.update();
         }
-        backRight.setPower(1);
-        backLeft.setPower(1);
-        frontRight.setPower(1);
-        frontLeft.setPower(1);
+        backRight.setPower(drivePower);
+        backLeft.setPower(drivePower);
+        frontRight.setPower(drivePower);
+        frontLeft.setPower(drivePower);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .2)) {
             telemetry.addData("Path:", "Moving Forwards", runtime.seconds());
             telemetry.update();
         }
-        backRight.setPower(1);
-        backLeft.setPower(-1);
-        frontRight.setPower(1);
-        frontLeft.setPower(-1);
+        backRight.setPower(drivePower);
+        backLeft.setPower(-drivePower);
+        frontRight.setPower(drivePower);
+        frontLeft.setPower(-drivePower);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .5)) {
             telemetry.addData("Path:", "Moving Turning", runtime.seconds());
             telemetry.update();
         }
-        backRight.setPower(1);
-        backLeft.setPower(-1);
-        frontRight.setPower(-1);
-        frontLeft.setPower(1);
+        backRight.setPower(drivePower);
+        backLeft.setPower(-drivePower);
+        frontRight.setPower(-drivePower);
+        frontLeft.setPower(drivePower);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .4)) {
             telemetry.addData("Path:", "Moving Sideways", runtime.seconds());
             telemetry.update();
         }
         backRight.setPower(0);
-        backLeft.setPower(-1);
+        backLeft.setPower(-drivePower);
         frontRight.setPower(0);
-        frontLeft.setPower(-1);
+        frontLeft.setPower(-drivePower);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .2)) {
             telemetry.addData("Path:", "Moving Turning", runtime.seconds());
             telemetry.update();
         }
         //Move the bot forward
-        backRight.setPower(1);
-        backLeft.setPower(1);
-        frontRight.setPower(1);
-        frontLeft.setPower(1);
+        backRight.setPower(drivePower);
+        backLeft.setPower(drivePower);
+        frontRight.setPower(drivePower);
+        frontLeft.setPower(drivePower);
         runtime.reset();
         while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .25)) {
             telemetry.addData("Path:", "Moving Forward", runtime.seconds());
@@ -165,22 +166,22 @@ public class autoFinal extends LinearOpMode {
          * And Position
          */
 
-            while (detector.isFound() == false) {
+            while (detector.isFound() == false && opModeIsActive() && !isStopRequested()) {
                 runtime.reset();
-                backRight.setPower(1);
-                backLeft.setPower(-1);
-                frontRight.setPower(1);
-                frontLeft.setPower(-1);
+                backRight.setPower(drivePower);
+                backLeft.setPower(-drivePower);
+                frontRight.setPower(drivePower);
+                frontLeft.setPower(-drivePower);
                 while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .5) && detector.isFound() == false) {
                     telemetry.addData("Block Status:", "Locating Gold", runtime.seconds());
                     telemetry.update();
                 }
                 totalTurnTime -= runtime.seconds();
                 runtime.reset();
-                backRight.setPower(-1);
-                backLeft.setPower(1);
-                frontRight.setPower(-1);
-                frontLeft.setPower(1);
+                backRight.setPower(-drivePower);
+                backLeft.setPower(drivePower);
+                frontRight.setPower(-drivePower);
+                frontLeft.setPower(drivePower);
                 while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 1) && detector.isFound() == false) {
                     telemetry.addData("Block Status:", "Locating Gold", runtime.seconds());
                     telemetry.update();
@@ -189,10 +190,10 @@ public class autoFinal extends LinearOpMode {
             }
             telemetry.addData("Block Status:", "Located", runtime.seconds());
             runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(1);
-            frontRight.setPower(1);
-            frontLeft.setPower(1);
+            backRight.setPower(drivePower);
+            backLeft.setPower(drivePower);
+            frontRight.setPower(drivePower);
+            frontLeft.setPower(drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .75)) {
                 telemetry.addData("Block Status:", "Moving Forward", runtime.seconds());
                 telemetry.update();
@@ -221,10 +222,10 @@ public class autoFinal extends LinearOpMode {
             }
             //code to knock block
             runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(1);
-            frontRight.setPower(1);
-            frontLeft.setPower(1);
+            backRight.setPower(drivePower);
+            backLeft.setPower(drivePower);
+            frontRight.setPower(drivePower);
+            frontLeft.setPower(drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 1)) {
                 telemetry.addData("Block Status:", "Knocking gold", runtime.seconds());
                 telemetry.update();
@@ -234,10 +235,10 @@ public class autoFinal extends LinearOpMode {
             if(totalTurnTime <= -.25) {totalTurnTime -= .25;}
             if(totalTurnTime <= 0) {
                 runtime.reset();
-                backRight.setPower(-1);
-                backLeft.setPower(1);
-                frontRight.setPower(-1);
-                frontLeft.setPower(1);
+                backRight.setPower(-drivePower);
+                backLeft.setPower(drivePower);
+                frontRight.setPower(-drivePower);
+                frontLeft.setPower(drivePower);
                 while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < -totalTurnTime)) {
                     telemetry.addData("Depot Status:", "Turning into position", runtime.seconds());
                     telemetry.update();
@@ -246,10 +247,10 @@ public class autoFinal extends LinearOpMode {
             if(totalTurnTime >= .25) {totalTurnTime+= .25;}
             if(totalTurnTime >= 0) {
                 runtime.reset();
-                backRight.setPower(1);
-                backLeft.setPower(-1);
-                frontRight.setPower(1);
-                frontLeft.setPower(-1);
+                backRight.setPower(drivePower);
+                backLeft.setPower(-drivePower);
+                frontRight.setPower(drivePower);
+                frontLeft.setPower(-drivePower);
                 while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < totalTurnTime)) {
                     telemetry.addData("Depot Status:", "Turning into position", runtime.seconds());
                     telemetry.update();
@@ -258,10 +259,10 @@ public class autoFinal extends LinearOpMode {
 
             //Move into depot
             runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(1);
-            frontRight.setPower(1);
-            frontLeft.setPower(1);
+            backRight.setPower(drivePower);
+            backLeft.setPower(drivePower);
+            frontRight.setPower(drivePower);
+            frontLeft.setPower(drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < .9)) {
                 telemetry.addData("Depot Status:", "Moving into position", runtime.seconds());
                 telemetry.update();
@@ -269,14 +270,14 @@ public class autoFinal extends LinearOpMode {
 
             //Shake marker off of robot
            runtime.reset();
-            intakeArm.setPower(1);
+            intakeArm.setPower(drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 3)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);
                 telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
                 telemetry.update();
             }
             runtime.reset();
-            intakeArm.setPower(-1);
+            intakeArm.setPower(-drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 2)) {
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition() + 50);
                 telemetry.addData("Depot Status:", "Shaking Marker", runtime.seconds());
@@ -287,10 +288,10 @@ public class autoFinal extends LinearOpMode {
             //Locate the pit and turn away from gold
 
             /**runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(-1);
-            frontRight.setPower(1);
-            frontLeft.setPower(-1);
+            backRight.setPower(drivePower);
+            backLeft.setPower(-drivePower);
+            frontRight.setPower(drivePower);
+            frontLeft.setPower(-drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 2) && !detector.isFound()) {
                 telemetry.addData("Crater Status:", "Locating Crater", runtime.seconds());
                 telemetry.update();
@@ -298,10 +299,10 @@ public class autoFinal extends LinearOpMode {
 
             //Drive to the pit
             runtime.reset();
-            backRight.setPower(1);
-            backLeft.setPower(1);
-            frontRight.setPower(1);
-            frontLeft.setPower(1);
+            backRight.setPower(drivePower);
+            backLeft.setPower(drivePower);
+            frontRight.setPower(drivePower);
+            frontLeft.setPower(drivePower);
             while (opModeIsActive() && !isStopRequested() && (runtime.seconds() < 3.5)) {
                 telemetry.addData("Crater Status:", "Moving to crater", runtime.seconds());
                 telemetry.update();

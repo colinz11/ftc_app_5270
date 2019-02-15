@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
@@ -10,8 +11,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class mecanumWheelsTest extends OpMode {
     //Variables for Mecanum Wheel Drive
     final double K = 1f;
-    final double drivePower = 1;
-    boolean encoderMode = true;
+    double drivePower = 1;
+    boolean encoderMode = false;
 
     //call DcMotors into play
         private DcMotor frontLeft = null;
@@ -22,7 +23,8 @@ public class mecanumWheelsTest extends OpMode {
         private DcMotor armExtension = null;
         private DcMotor intake = null;
         private DcMotor intakeArm = null;
-
+        private CRServo intakeServo1 = null;
+        private CRServo intakeServo2 = null;
         @Override
         public void init() {
             telemetry.addData("Status", "Initialized");
@@ -38,27 +40,35 @@ public class mecanumWheelsTest extends OpMode {
             armExtension = hardwareMap.get(DcMotor.class, "armExtension");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
+            intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
+            intakeServo2 = hardwareMap.get(CRServo.class, "intakeServo2");
 
-            //reset encoder position the set mode to run_to_position
 
 
             //Set on side of the robot's motors to reverse
-           // frontLeft.setDirection(DcMotor.Direction.REVERSE);
-            //backLeft.setDirection(DcMotor.Direction.REVERSE);
+           frontLeft.setDirection(DcMotor.Direction.REVERSE);
+           backLeft.setDirection(DcMotor.Direction.REVERSE);
             //Display Initialized
             telemetry.addData("Status", "Initialized");
             intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
+
         }
 
 
         public void loop() {
             //run the intake forwards / backwards based on button pressed
-            if(gamepad2.a)
-                intake.setPower(1);
-            else if(gamepad2.b)
-                intake.setPower(-1);
-            else
-                intake.setPower(0);
+            if(gamepad2.a) {
+                intakeServo1.setPower(1);
+                intakeServo2.setPower(1);
+            }
+            else if(gamepad2.b) {
+                intakeServo1.setPower(-1);
+                intakeServo2.setPower(-1);
+            }
+            else {
+                intakeServo1.setPower(0);
+                intakeServo2.setPower(0);
+            }
             //run the lift
             if (gamepad1.left_trigger > .1)
                 lift.setPower(1);
@@ -73,8 +83,12 @@ public class mecanumWheelsTest extends OpMode {
                  armExtension.setPower(-.5);
             else
                 armExtension.setPower(0);
+            if(gamepad1.x)
+                drivePower = 1;
+            if(gamepad1.y)
+                drivePower = .25;
 
-            if(gamepad2.y)
+            if(gamepad2.x)
             {
                 intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -82,7 +96,7 @@ public class mecanumWheelsTest extends OpMode {
                 encoderMode = true;
                 intakeArm.setPower(1); //Set motor power to 1
             }
-            if(gamepad2.x)
+            if(gamepad2.y)
             {
                 intakeArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 encoderMode = false;
@@ -90,7 +104,7 @@ public class mecanumWheelsTest extends OpMode {
             }
             //move the intake arm
 
-            if(encoderMode = true) {
+            if(encoderMode) {
                 if (gamepad2.left_stick_y > .1) {
                     intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);//set the target position to 50 less
                     telemetry.addData("Target Position", intakeArm.getCurrentPosition() - 50);
@@ -99,7 +113,7 @@ public class mecanumWheelsTest extends OpMode {
                     telemetry.addData("Target Position", intakeArm.getCurrentPosition() + 50);
                 }
             }
-            else
+            else if (!encoderMode)
             {
                 if (gamepad2.left_stick_y > .1) {
                     intakeArm.setPower(-1);
