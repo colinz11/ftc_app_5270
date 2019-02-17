@@ -28,7 +28,8 @@ public class autoFinal extends LinearOpMode {
     @Override
     public void runOpMode() {
         float totalTurnTime = 0;
-        float drivePower = .25f;
+        float drivePower = .70f;
+        int targetPos = 11000;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -48,7 +49,6 @@ public class autoFinal extends LinearOpMode {
         //reset encoder position the set mode to run_to_position
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        int targetPos = 32000;
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
