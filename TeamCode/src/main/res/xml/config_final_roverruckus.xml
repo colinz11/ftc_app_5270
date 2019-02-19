@@ -17,7 +17,6 @@
     <NeveRest40Gearmotor name="lift" port="2"/>
     <NeveRest60Gearmotor name="armExtension" port="3"/>
     <ContinuousRotationServo name="intakeServo1" port ="0"/>
-    <ContinuousRotationServo name="intakeServo2" port ="1"/>
     <LynxEmbeddedIMU name="imu 1" port="0" bus="0"/>
 </LynxModule>
 </LynxUsbDevice>

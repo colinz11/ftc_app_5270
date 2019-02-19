@@ -24,7 +24,6 @@ public class mecanumWheelsTest extends OpMode {
         private DcMotor intake = null;
         private DcMotor intakeArm = null;
         private CRServo intakeServo1 = null;
-        private CRServo intakeServo2 = null;
         @Override
         public void init() {
             telemetry.addData("Status", "Initialized");
@@ -41,7 +40,6 @@ public class mecanumWheelsTest extends OpMode {
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
             intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
-            intakeServo2 = hardwareMap.get(CRServo.class, "intakeServo2");
 
 
 
@@ -59,15 +57,12 @@ public class mecanumWheelsTest extends OpMode {
             //run the intake forwards / backwards based on button pressed
             if(gamepad2.a) {
                 intakeServo1.setPower(1);
-                intakeServo2.setPower(1);
             }
             else if(gamepad2.b) {
                 intakeServo1.setPower(-1);
-                intakeServo2.setPower(-1);
             }
             else {
                 intakeServo1.setPower(0);
-                intakeServo2.setPower(0);
             }
             //run the lift
             if (gamepad1.left_trigger > .1)
@@ -90,7 +85,6 @@ public class mecanumWheelsTest extends OpMode {
 
             if(gamepad2.x)
             {
-                intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 intakeArm.setTargetPosition(intakeArm.getCurrentPosition());
                 encoderMode = true;
@@ -103,7 +97,10 @@ public class mecanumWheelsTest extends OpMode {
                 intakeArm.setPower(0);
             }
             //move the intake arm
-
+            if(gamepad2.left_stick_button){
+                intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                intakeArm.setTargetPosition(5000);
+            }
             if(encoderMode) {
                 if (gamepad2.left_stick_y > .1) {
                     intakeArm.setTargetPosition(intakeArm.getCurrentPosition() - 50);//set the target position to 50 less
