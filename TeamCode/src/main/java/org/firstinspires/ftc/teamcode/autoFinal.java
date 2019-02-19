@@ -29,7 +29,7 @@ public class autoFinal extends LinearOpMode {
     public void runOpMode() {
         float totalTurnTime = 0;
         float drivePower = .70f;
-        int targetPos = 11000;
+        int targetPos = 15000;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
