@@ -39,10 +39,9 @@ public class mecanumWheelsTest extends OpMode {
             armExtension = hardwareMap.get(DcMotor.class, "armExtension");
             intake = hardwareMap.get(DcMotor.class, "intake");
             intakeArm = hardwareMap.get(DcMotor.class, "intakeArm");
-            intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
 
 
-
+            intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //Set on side of the robot's motors to reverse
            frontLeft.setDirection(DcMotor.Direction.REVERSE);
            backLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -98,8 +97,10 @@ public class mecanumWheelsTest extends OpMode {
             }
             //move the intake arm
             if(gamepad2.left_stick_button){
-                intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                intakeArm.setTargetPosition(5000);
+                if(!encoderMode)
+                   intakeArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                intakeArm.setPower(.5);
+                intakeArm.setTargetPosition(-2000);
             }
             if(encoderMode) {
                 if (gamepad2.left_stick_y > .1) {
