@@ -2,7 +2,6 @@
 
     <Robot type="FirstInspires-FTC">
 
-    <Webcam serialNumber="BF97DF90" name="Camera"/>
     -<LynxUsbDevice parentModuleAddress="1" serialNumber="DQ2AEWVG" name="Expansion Hub Portal 1">
     -<LynxModule name="Expansion Hub 2" port="2">
     <NeveRest40Gearmotor name="frontRight" port="0"/>
@@ -16,7 +15,6 @@
     <Motor name="intakeArm" port="1"/>
     <NeveRest40Gearmotor name="lift" port="2"/>
     <NeveRest60Gearmotor name="armExtension" port="3"/>
-    <ContinuousRotationServo name="intakeServo1" port ="0"/>
     <LynxEmbeddedIMU name="imu 1" port="0" bus="0"/>
 </LynxModule>
 </LynxUsbDevice>
