@@ -220,7 +220,7 @@ public class autoFinal extends LinearOpMode {
                     telemetry.update();
                 }
             }
-            //code to knock block
+           /** //code to knock block
             runtime.reset();
             backRight.setPower(drivePower);
             backLeft.setPower(drivePower);
@@ -308,6 +308,7 @@ public class autoFinal extends LinearOpMode {
                 telemetry.update();
             }**/
         // Disable the detector
+
         detector.disable();
         backRight.setPower(0);
         backLeft.setPower(0);
