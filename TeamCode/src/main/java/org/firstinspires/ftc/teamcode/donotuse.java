@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
-@TeleOp(name="YO MATE EAT MY CHEESE", group="DogeCV")
+@TeleOp(name="Do Not Use", group="DogeCV")
 
 public class donotuse extends OpMode
 {
