@@ -17,39 +17,38 @@ public class BasicDrive extends OpMode {
 
     @Override
     public void init() {
-        leftDrive = hardwareMap.get(DcMotor.class, "rigtDrive");
+        leftDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         arm = hardwareMap.get(DcMotor.class, "arm");
         leftServo = hardwareMap.get(Servo.class, "leftServo");
         rightServo = hardwareMap.get(Servo.class, "rightServo");
 
 
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
-
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);//this reverse one side of the robot so it moves properly
     }
 
     @Override
     public void loop() {
 
         forwardPower = gamepad1.left_stick_y; //Get Forward power based on y value of left joystick
-        turnPower = gamepad1.right_stick_x; //Get Turn power based on x value of left joystick
+        turnPower = gamepad1.left_stick_x; //Get Turn power based on x value of left joystick
 
         if (turnPower > .1 || turnPower < -.1) { //Check if the left stick is far enough to the right or left
-            leftDrive.setPower(-turnPower); //Turn based on turn power
-            rightDrive.setPower(turnPower);
+            leftDrive.setPower(turnPower); //Turn based on turn power
+            rightDrive.setPower(-turnPower);
         } else { //if not turning, drive
             leftDrive.setPower(forwardPower);
             rightDrive.setPower(forwardPower);
-        }
 
-        arm.setPower(gamepad1.right_stick_y); // move the arm based on the y position of the right joystick
+            arm.setPower(gamepad1.right_stick_y); // move the arm based on the y position of the right joystick
 
-        if (gamepad1.a) { //if the a button is pressed, clamp the servos, otherwise, go back to a rest position
-            leftServo.setPosition(0);
-            rightServo.setPosition(180);
-        } else {
-            leftServo.setPosition(160);
-            rightServo.setPosition(20);
+            if (gamepad1.a) { //if the a button is pressed, clamp the servos, otherwise, go back to a rest position
+                leftServo.setPosition(0);
+                rightServo.setPosition(180);
+            } else {
+                leftServo.setPosition(180);
+                rightServo.setPosition(0);
+            }
         }
     }
 }
